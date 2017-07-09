@@ -1,33 +1,38 @@
 import React, {Component} from 'react';
-import './trance-trader.css';
+import './css/trance-trader.css';
 import Portfolio from './components/portfolio';
 import TransactionForm from './components/transaction-form';
-
 const LOCAL_KEY = 'appState'
+const GOOG = 'http://finance.google.com/finance/info?q=';
 
 class TranceTrader extends Component {
 
   constructor(props) {
     super(props)
 
-  this.state = (this.syncFromStorage()) || {
-    tickers: []
+    this.saveTransaction = this.saveTransaction.bind(this);
+    this.syncFromStorage = this.syncFromStorage.bind(this);
+    this.retrieveMarketData = this.retrieveMarketData.bind(this);
+    this.updatePortfolio = this.updatePortfolio.bind(this);
+
+    this.state = (this.syncFromStorage()) || {
+      tickers: []
   };
 
-    this.syncFromStorage = this.syncFromStorage.bind(this)
   }
 
   componentWillMount() {
-
+    this.retrieveMarketData();
   }
 
   saveTransaction(trans) {
     let tickers = this.state.tickers;
     if(this.isValidTransaction(trans)) {
-      trans.id = trans.id || this.guid();
+      trans.id = trans.id || //this.guid();
       tickers.push(trans);
       this.setState(tickers);
       this.syncToStorage(this.state);
+      this.retrieveMarketData();
     }
   }
 
@@ -46,13 +51,45 @@ class TranceTrader extends Component {
       && trans.date.length > 0
 
   }
+
+  retrieveMarketData() {
+
+    let tickers = this.state.tickers;
+    if (tickers.length > 0) {
+      let url = GOOG + tickers.map((a) => `NSE:${a.symbol.toUpperCase()}`).join(',');
+      fetch(url).then((res) => {
+        return res.text();
+      }).then((text) => {
+        this.updatePortfolio(JSON.parse(text.substr(4)));
+      });
+    }
+  }
+
+  updatePortfolio(data) {
+    if (data) {
+      let prices = data.reduce((note, s) => {
+        note[s.t] = s.l
+        return note;
+      }, {});
+      let tickers = this.state.tickers.map((t) => {
+        t['currentPrice'] = prices[t.symbol];
+        return t
+      });
+      this.setState({
+        tickers: tickers
+      });
+      this.syncToStorage(this.state);
+    }
+  }
+
   render() {
     return (
-      <div className="app">
+      <div className='app'>
         <h2>Trance Trader</h2>
-        <hr/>
-        <TransactionForm trans={''} onSave={this.saveTransaction}/>
-        <Portfolio tickers={this.state.tickers}/>
+        <button onClick={this.retrieveMarketData}>Update</button>
+        <hr />
+        <TransactionForm trans={''} onSave={this.saveTransaction} />
+        <Portfolio tickers={this.state.tickers} />
       </div>
     )
   }

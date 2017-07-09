@@ -1,0 +1,16 @@
+.ticker {
+  display: flex;
+  margin: 10px 0;
+}
+
+.ticker .cell {
+  margin-right: 10px;
+}
+
+.ticker .cell:last-child {
+  margin-right:0;
+}
+
+.stock .symbol {
+  text-transform: uppercase;
+}

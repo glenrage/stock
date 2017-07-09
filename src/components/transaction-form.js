@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './transaction-form.css'
+import '../css/transaction-form.css'
 
 class TransactionForm extends Component {
   constructor(props) {
