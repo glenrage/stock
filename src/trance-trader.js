@@ -83,7 +83,6 @@ class TranceTrader extends Component {
           jsonp: 'callback',
           dataType: 'jsonp',
           success: (response) => {
-            console.log(response)
               if (response) {
                   this.updatePortfolio(response);
               }
@@ -93,14 +92,26 @@ class TranceTrader extends Component {
   }
 
   updatePortfolio(data) {
+    console.log('data : ' + data)
     if (data) {
-      let prices = data.reduce((note, s) => {
-        note[s.t] = s.l
+      let symbols = data.reduce((note, s) => {
+        note[s.t] = s;
         return note;
       }, {});
-      let tickers = this.state.tickers.map((t) => {
-        t['currentPrice'] = prices[t.symbol];
-        return t
+      console.log(symbols)
+      let tickers = this.state.tickers.map((s) => {
+        let symbol = symbols[s.symbol]
+
+        if(symbol) {
+          s['currentPrice'] = symbol.l;
+          s['change'] = symbol.c;
+          s['changePercent'] = symbol.cp;
+          return s;
+        } else {
+          console.log(s.symbol)
+          return {}
+        }
+
       });
       this.setState({
         tickers: tickers

@@ -1,73 +1,103 @@
-.ticker {
-  position: relative;
-  margin: 30px 0;
-  font-weight: 300;
-  color: red;
-  font-size: .9rem;
+.stock {
+    display: flex;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px #eee;
+    border: 1px solid #eeeeee;
+    border-radius: 3px;
+    margin-top: 10px;
+    padding: 10px 0;
 }
 
-.ticker .investment {
-  margin-bottom: 10px;
+.stock > * {
+    flex: 1;
+    text-align: center;
 }
 
-.ticker .return.loss {
-  color: blue;
+.details {
+    position: relative;
+    min-height: 120px;
+    height: 120px;
+    max-height: 120px;
+    max-width: 120px;
+    z-index: 10;
 }
 
-.ticker .reurn.gain {
-  color: yellow;
+.details .symbol {
+    font-size: .8rem;
+    font-weight: bold;
 }
 
-.ticker .separator:after {
-  display: inline-block;
-  content: '/';
-  margin-right: 10px;
-  color: green;
+.details .market {
+    margin-top: 10px;
 }
 
-.ticker .symbol {
-  text-transform: uppercase;
-  margin-right: 10px;
-  color: purple;
+.market-price {
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-top: 10px;
+}
+.price-change {
+    font-size: .8rem;
+    margin-top: 5px;
 }
 
-.ticker .cost {
-  color: orange;
-  margin-right: 10px;
+.details .progress {
+    transform: rotate(-90deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
 }
 
-.ticker .age{
-  color: brown;
+.details .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.ticker .return {
-  font-size: 1.4em;
+.volatile-value.up {
+    color: #27ae60;
 }
 
-.ticker .current-price {
-  margin-right: 10px;
+.volatile-value.down {
+    color: #e74c3c;
 }
 
-.ticker .profit {
-  margin-right: 10px;
+.volatile-value:after {
+    font-size: .8rem;
+    margin-right: 3px;
 }
 
-.ticker .value {
-
+.volatile-value.up:after {
+    content: '▲';
+    color: #27ae60;
 }
 
-.ticker .actions {
-  position: absolute;
-  top: 0;
-  right: 0;
+.volatile-value.down:after {
+    content: '▼';
+    color: #e74c3c;
 }
 
-.ticker .actions li {
-  cursor: pointer;
-  background-color: #555;
-  color: #fff;
-  padding: 5px 6px;
-  border-radius: 50%;
-  font-size: .5rem;
-  font-weight: 300;
+
+.investment .cost {
+    font-size: 1.5rem;
+}
+
+.return .worth {
+    font-size: 1.5rem;
+}
+
+.return .current-value {
+    font-size: 1.5rem;
+}
+
+.line-items p {
+    margin-top: 15px;
+}
+
+.actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
