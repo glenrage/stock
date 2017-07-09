@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import '../css/ticker.css'
 import Gauge from './gauge';
-
-let CURRENCY = '$'
+import Helpers from '../helpers'
 
 class Ticker extends Component {
 
@@ -14,15 +13,12 @@ class Ticker extends Component {
   }
 
   daysOld(date) {
+      console.log('date :' + date)
     let single = 24 * 60 * 60 * 1000
     let parts = date.split('/');
     let first = new Date(parts[2], parts[1], parts[0]);
     let second = new Date()
     return Math.round(Math.abs((first.getTime() - second.getTime()) / (single)));
-  }
-
-  currency(value = 0) {
-    return (CURRENCY + value.toLocaleString());
   }
 
   removeTicker() {
@@ -49,7 +45,6 @@ class Ticker extends Component {
 
     let changeInPriceClassNames = classnames({
       'volatile-value': true,
-      profit: true,
       'change-in-price': true,
       down: changeInPrice < 0,
       up: changeInPrice > 0
@@ -66,10 +61,10 @@ class Ticker extends Component {
       <div className='ticker'>
         <div className='investment line-items'>
           <p className='bought-price'>
-            {this.currency(ticker.price)}
+            {Helpers.currency(ticker.price)}
             </p>
           <p className='cost'>
-            {this.currency(cost)}
+            {Helpers.currency(cost)}
           </p>
           <p className='age'>
             {daysOld} days ago
@@ -77,13 +72,12 @@ class Ticker extends Component {
         </div>
         <div className='details'>
           <Gauge className='profit-meter' value={gains} />
-
           <div className='content'>
             <p className='symbol'>
               {ticker.symbol}
             </p>
-            <p className="market-price">
-              {this.currency(ticker.currentPrice)}
+            <p className='market-price'>
+              {Helpers.currency(ticker.currentPrice)}
             </p>
             <p className={priceChangeClassNames}>
               {ticker.change}
@@ -95,15 +89,15 @@ class Ticker extends Component {
             {(ticker.currentPrice - ticker.price).toFixed(2)}
           </p>
           <p className='current-value'>
-            {this.currency(value)}
+            {Helpers.currency(value)}
           </p>
           <p className={profitChangeClassNames}>
-            {this.currency(profit)}
+            {Helpers.currency(profit)}
           </p>
 
         </div>
         <ul className='actions'>
-          <li onClick={this.props.onRemoveTicker}>X</li>
+          <li onClick={this.removeTicker}>X</li>
         </ul>
       </div>
     )

@@ -1,8 +1,10 @@
 import $ from 'jquery'
 import React, {Component} from 'react';
 import './css/trance-trader.css';
+
 import Portfolio from './components/portfolio';
 import TransactionForm from './components/transaction-form';
+
 const LOCAL_KEY = 'appState'
 const GOOG = 'https://finance.google.com/finance/info?q=';
 const prefix = '//'
@@ -32,7 +34,7 @@ class TranceTrader extends Component {
   saveTransaction(trans) {
     let tickers = this.state.tickers;
     if(this.isValidTransaction(trans)) {
-      trans.id = trans.id || //this.guid();
+      trans.id = trans.id || this.guid();
       tickers.push(trans);
       this.setState({
         tickers: tickers,
@@ -76,18 +78,30 @@ class TranceTrader extends Component {
   retrieveMarketData() {
     let tickers = this.state.tickers;
     if (tickers.length > 0) {
-      console.log(tickers)
-      let url = GOOG + tickers.map((a) => `${a.symbol.toUpperCase()}`).join(',');
-      $.ajax({
-          url: url,
-          jsonp: 'callback',
-          dataType: 'jsonp',
-          success: (response) => {
-              if (response) {
-                  this.updatePortfolio(response);
-              }
-          }
-      });
+
+      let url = GOOG + tickers.map((s) => `${s.symbol.toUpperCase()}`).join(',');
+  //     let options = this.isLocalHost() ? {} : {
+  //                mode: 'no-cors'};
+  //     fetch(url, options).then(r => r.text()).then((text) => {
+  //      if (text) {
+  //          text = text.substr(text.indexOf(prefix) + prefix.length);
+  //          text = text.trim();
+  //          this.updatePortfolio(JSON.parse(text));
+  //      }
+  //  }).catch((error) => {
+  //      console.error('Unable to fetch market data', error);
+  //  });
+      // $.ajax({
+      //     url: url,
+      //     jsonp: 'callback',
+      //     dataType: 'jsonp',
+      //     success: (response) => {
+      //         if (response) {
+      //             this.updatePortfolio(response);
+      //         }
+      //     }
+      // });
+
     }
   }
 
@@ -98,7 +112,7 @@ class TranceTrader extends Component {
         note[s.t] = s;
         return note;
       }, {});
-      console.log(symbols)
+      console.log('symbols :' +symbols)
       let tickers = this.state.tickers.map((s) => {
         let symbol = symbols[s.symbol]
 
@@ -108,7 +122,7 @@ class TranceTrader extends Component {
           s['changePercent'] = symbol.cp;
           return s;
         } else {
-          console.log(s.symbol)
+          console.log('s.symbol : ' + s.symbol)
           return {}
         }
 
@@ -119,6 +133,15 @@ class TranceTrader extends Component {
       this.syncToStorage(this.state);
     }
   }
+
+  guid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            // eslint-disable-next-line
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
 
   render() {
     return (

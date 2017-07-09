@@ -1,0 +1,17 @@
+.wealth {
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px 0;
+    background: #e9d460;  /* fallback for old browsers */
+}
+
+.wealth .current {
+    color: #5d5d5d;
+    font-size: 1.6rem;
+    letter-spacing: 1pt;
+}
+
+.wealth-change {
+    margin-top: 5px;
+    letter-spacing: 1pt;
+}
