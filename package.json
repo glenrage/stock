@@ -28,5 +28,6 @@
   "devDependencies": {
     "react-scripts": "1.0.7"
   },
+  "proxy": "http://localhost:3001",
   "homepage": "https://github.com/glenrage/stock#readme"
 }
