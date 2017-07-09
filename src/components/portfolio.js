@@ -3,10 +3,6 @@ import Ticker from './ticker';
 
 class Portfolio extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="portfolio">

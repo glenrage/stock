@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 
 class Ticker extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let ticker = this.props.ticker;

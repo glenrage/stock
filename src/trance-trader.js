@@ -1,18 +1,24 @@
 import React, {Component} from 'react';
-import './trance-trader.css'
-import Portfolio from './components/portfolio'
-import TransactionForm from './components/transaction-form'
+import './trance-trader.css';
+import Portfolio from './components/portfolio';
+import TransactionForm from './components/transaction-form';
+
+const LOCAL_KEY = 'appState'
 
 class TranceTrader extends Component {
 
   constructor(props) {
     super(props)
 
-    this.state = {
-      tickers: []
-    };
+  this.state = (this.syncFromStorage()) || {
+    tickers: []
+  };
 
-    this.saveTransaction = this.saveTransaction.bind(this)
+    this.syncFromStorage = this.syncFromStorage.bind(this)
+  }
+
+  componentWillMount() {
+
   }
 
   saveTransaction(trans) {
@@ -21,7 +27,16 @@ class TranceTrader extends Component {
       trans.id = trans.id || this.guid();
       tickers.push(trans);
       this.setState(tickers);
+      this.syncToStorage(this.state);
     }
+  }
+
+  syncToStorage(state) {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(state));
+  }
+
+  syncFromStorage() {
+    return JSON.parse(localStorage.getItem('appState'))
   }
 
   isValidTransaction(trans){
