@@ -1,0 +1,37 @@
+.transaction-form {
+  display: flex;
+}
+
+.transaction-form > * {
+  width: 20%;
+}
+
+.input-field {
+  padding: 5px;
+  margin-right: 5px;
+  border: 1px solid #666;
+}
+
+.input-field: last-child {
+  margin-right: 0;
+}
+
+.input-field.symbol {
+  width: 20%;
+}
+
+.input-field.price {
+  width: 15%;
+}
+
+.input-field.qty {
+  width: 10%;
+}
+
+.input-field.date {
+  width: 25%;
+}
+
+.input-field.btn {
+  width: 30px;
+}
