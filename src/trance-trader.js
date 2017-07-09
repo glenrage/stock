@@ -3,7 +3,7 @@ import './css/trance-trader.css';
 import Portfolio from './components/portfolio';
 import TransactionForm from './components/transaction-form';
 const LOCAL_KEY = 'appState'
-const GOOG = 'http://finance.google.com/finance/info?q=';
+const GOOG = 'https://finance.google.com/finance/info?q=';
 
 class TranceTrader extends Component {
 
@@ -57,11 +57,13 @@ class TranceTrader extends Component {
   }
 
   retrieveMarketData() {
-
     let tickers = this.state.tickers;
     if (tickers.length > 0) {
+      console.log(tickers)
+      let proxy = 'https://cors-anywhere.herokuapp.com/'
       let url = GOOG + tickers.map((a) => `NSE:${a.symbol.toUpperCase()}`).join(',');
-      fetch(url).then((res) => {
+      fetch(proxy + url).then((res) => {
+        console.log(res)
         return res.text();
       }).then((text) => {
         this.updatePortfolio(JSON.parse(text.substr(4)));
@@ -89,9 +91,9 @@ class TranceTrader extends Component {
   render() {
     return (
       <div className='app'>
-        <h2>Trance Trader</h2>
-        <button onClick={this.retrieveMarketData}>Update</button>
-        <hr />
+      //
+
+
         <TransactionForm trans={this.state.trans} onSave={this.saveTransaction} />
         <Portfolio tickers={this.state.tickers} />
       </div>
@@ -100,3 +102,8 @@ class TranceTrader extends Component {
 }
 
 export default TranceTrader;
+
+
+// <h2>Trance Trader</h2>
+// <button onClick={this.retrieveMarketData}>Update</button>
+// <hr />

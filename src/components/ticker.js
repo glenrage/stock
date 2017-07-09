@@ -6,13 +6,27 @@ class Ticker extends Component {
   render() {
     let ticker = this.props.ticker;
 
+    let cost = ticker.qty * ticker.price;
+    let total = ticker.qty * ticker.currentPrice;
+    let profit = total - cost;
+    let loss = (profit < 0)
+
     return (
-      <div className="ticker">
-        <p className="symbol cell">{ticker.symbol}</p>
-        <p className="current-price cell">{ticker.currentPrice || ticker.price}</p>
-        <p className="price cell">{ticker.price}</p>
-        <p className="qty cell">{ticker.qty}</p>
-        <p className="date cell">{ticker.date}</p>
+      <div className='ticker'>
+        <div className='investment'>
+          <span className='symbol'>{ticker.symbol}</span>
+          <i className='separator' />
+          <span className='cost'>{`${ticker.qty} * ${ticker.price} = ${(ticker.qty * ticker.price).toLocaleString()}`}</span>
+          <i className='separator' />
+          <span className='age'>0 days</span>
+        </div>
+        <div className={`return ${loss ? 'loss' : 'gain'}`}>
+          <span className='current-price'>${ticker.currentPrice}</span>
+          <i className='separator' />
+          <span className='profit'>${profit.toLocaleString()}</span>
+          <i className='separator' />
+          <span className='profit'>${total.toLocaleString()}</span>
+        </div>
       </div>
     )
   }
