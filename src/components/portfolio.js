@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Stock from './stock';
+import Ticker from './ticker';
 
 class Portfolio extends Component {
 
@@ -11,7 +11,7 @@ class Portfolio extends Component {
     return (
       <div className="portfolio">
         {
-          this.props.stocks.map((stock) => <Stock stock={stock}/>)
+          this.props.tickers.map((ticker) => <Ticker key={ticker.id} ticker={ticker} />)
         }
       </div>
     )

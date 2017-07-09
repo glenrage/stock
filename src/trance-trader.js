@@ -9,19 +9,26 @@ class TranceTrader extends Component {
     super(props)
 
     this.state = {
-      stocks: []
+      tickers: []
     };
 
     this.saveTransaction = this.saveTransaction.bind(this)
   }
 
   saveTransaction(trans) {
-    let stocks = this.state.stocks;
-    stocks.push(trans);
-    this.setState(stocks)
+    let tickers = this.state.tickers;
+    if(this.isValidTransaction(trans)) {
+      trans.id = trans.id || this.guid();
+      tickers.push(trans);
+      this.setState(tickers);
+    }
   }
 
   isValidTransaction(trans){
+    return trans.symbol.length > 0
+      && trans.price > 0
+      && trans.qty > 0
+      && trans.date.length > 0
 
   }
   render() {
@@ -30,7 +37,7 @@ class TranceTrader extends Component {
         <h2>Trance Trader</h2>
         <hr/>
         <TransactionForm trans={''} onSave={this.saveTransaction}/>
-        <Portfolio stocks={this.state.stocks}/>
+        <Portfolio tickers={this.state.tickers}/>
       </div>
     )
   }
