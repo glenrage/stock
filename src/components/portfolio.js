@@ -7,7 +7,7 @@ class Portfolio extends Component {
     return (
       <div className="portfolio">
         {
-          this.props.tickers.map((ticker) => <Ticker key={ticker.id} ticker={ticker} />)
+          this.props.tickers.map((ticker) => <Ticker key={ticker.id} ticker={ticker} {...this.props} />)
         }
       </div>
     )

@@ -1,9 +1,11 @@
+import $ from 'jquery'
 import React, {Component} from 'react';
 import './css/trance-trader.css';
 import Portfolio from './components/portfolio';
 import TransactionForm from './components/transaction-form';
 const LOCAL_KEY = 'appState'
 const GOOG = 'https://finance.google.com/finance/info?q=';
+const prefix = '//'
 
 class TranceTrader extends Component {
 
@@ -14,6 +16,7 @@ class TranceTrader extends Component {
     this.syncFromStorage = this.syncFromStorage.bind(this);
     this.retrieveMarketData = this.retrieveMarketData.bind(this);
     this.updatePortfolio = this.updatePortfolio.bind(this);
+    this.removeTicker = this.removeTicker.bind(this)
 
     this.state = (this.syncFromStorage()) || {
       tickers: [],
@@ -40,8 +43,19 @@ class TranceTrader extends Component {
     }
   }
 
+  removeTicker(id) {
+    let tickers = this.state.tickers.filter((t) => t.id !== id);
+    this.setState({
+      tickers: tickers
+    }, () => {
+      this.syncToStorage(this.state)
+    });
+  }
+
   syncToStorage(state) {
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(state));
+    if (!!state) {
+      localStorage.setItem(LOCAL_KEY, JSON.stringify(state));
+    }
   }
 
   syncFromStorage() {
@@ -53,20 +67,27 @@ class TranceTrader extends Component {
       && trans.price > 0
       && trans.qty > 0
       && trans.date.length > 0
+  }
 
+  isLocalHost() {
+    return (window.location.hostname === 'localhost');
   }
 
   retrieveMarketData() {
     let tickers = this.state.tickers;
     if (tickers.length > 0) {
       console.log(tickers)
-      let proxy = 'https://cors-anywhere.herokuapp.com/'
-      let url = GOOG + tickers.map((a) => `NSE:${a.symbol.toUpperCase()}`).join(',');
-      fetch(proxy + url).then((res) => {
-        console.log(res)
-        return res.text();
-      }).then((text) => {
-        this.updatePortfolio(JSON.parse(text.substr(4)));
+      let url = GOOG + tickers.map((a) => `${a.symbol.toUpperCase()}`).join(',');
+      $.ajax({
+          url: url,
+          jsonp: 'callback',
+          dataType: 'jsonp',
+          success: (response) => {
+            console.log(response)
+              if (response) {
+                  this.updatePortfolio(response);
+              }
+          }
       });
     }
   }
@@ -91,19 +112,15 @@ class TranceTrader extends Component {
   render() {
     return (
       <div className='app'>
-      //
-
 
         <TransactionForm trans={this.state.trans} onSave={this.saveTransaction} />
-        <Portfolio tickers={this.state.tickers} />
+        <Portfolio
+          tickers={this.state.tickers}
+          onRemoveTicker={this.removeTicker}
+          />
       </div>
     )
   }
 }
 
 export default TranceTrader;
-
-
-// <h2>Trance Trader</h2>
-// <button onClick={this.retrieveMarketData}>Update</button>
-// <hr />

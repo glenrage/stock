@@ -18,16 +18,15 @@
     "url": "https://github.com/glenrage/stock/issues"
   },
   "dependencies": {
-   "classnames": "^2.2.5",
-   "jquery": "^3.2.1",
-   "react": "^15.5.4",
-   "react-autosuggest": "^9.3.1",
-   "react-dom": "^15.5.4",
-   "react-router-dom": "^4.1.1"
- },
- "devDependencies": {
-   "react-scripts": "1.0.7"
- },
-  "proxy": "http://localhost:4000",
+    "classnames": "^2.2.5",
+    "jquery": "^3.2.1",
+    "react": "^15.5.4",
+    "react-autosuggest": "^9.3.1",
+    "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
+  },
   "homepage": "https://github.com/glenrage/stock#readme"
 }

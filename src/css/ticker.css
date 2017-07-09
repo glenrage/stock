@@ -1,5 +1,5 @@
 .ticker {
-  display: flex;
+  position: relative;
   margin: 30px 0;
   font-weight: 300;
   color: red;
@@ -52,6 +52,22 @@
   margin-right: 10px;
 }
 
-.stock .value {
+.ticker .value {
 
+}
+
+.ticker .actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.ticker .actions li {
+  cursor: pointer;
+  background-color: #555;
+  color: #fff;
+  padding: 5px 6px;
+  border-radius: 50%;
+  font-size: .5rem;
+  font-weight: 300;
 }
