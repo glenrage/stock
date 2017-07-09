@@ -16,7 +16,8 @@ class TranceTrader extends Component {
     this.updatePortfolio = this.updatePortfolio.bind(this);
 
     this.state = (this.syncFromStorage()) || {
-      tickers: []
+      tickers: [],
+      trans: {}
   };
 
   }
@@ -30,7 +31,10 @@ class TranceTrader extends Component {
     if(this.isValidTransaction(trans)) {
       trans.id = trans.id || //this.guid();
       tickers.push(trans);
-      this.setState(tickers);
+      this.setState({
+        tickers: tickers,
+        trans: {}
+      });
       this.syncToStorage(this.state);
       this.retrieveMarketData();
     }
@@ -88,7 +92,7 @@ class TranceTrader extends Component {
         <h2>Trance Trader</h2>
         <button onClick={this.retrieveMarketData}>Update</button>
         <hr />
-        <TransactionForm trans={''} onSave={this.saveTransaction} />
+        <TransactionForm trans={this.state.trans} onSave={this.saveTransaction} />
         <Portfolio tickers={this.state.tickers} />
       </div>
     )

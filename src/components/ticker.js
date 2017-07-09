@@ -9,7 +9,7 @@ class Ticker extends Component {
     return (
       <div className="ticker">
         <p className="symbol cell">{ticker.symbol}</p>
-        <p className="current-price cell">{ticker.currentPrice}</p>
+        <p className="current-price cell">{ticker.currentPrice || ticker.price}</p>
         <p className="price cell">{ticker.price}</p>
         <p className="qty cell">{ticker.qty}</p>
         <p className="date cell">{ticker.date}</p>
