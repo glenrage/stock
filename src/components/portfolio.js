@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import classnames from 'classnames';
 import Ticker from './ticker';
 import Helpers from '../helpers'

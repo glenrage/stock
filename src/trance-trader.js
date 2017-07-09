@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import './css/trance-trader.css';
 
 import Portfolio from './components/portfolio';
@@ -112,7 +113,7 @@ class TranceTrader extends Component {
         note[s.t] = s;
         return note;
       }, {});
-      console.log('symbols :' +symbols)
+      console.log('symbols :' + symbols)
       let tickers = this.state.tickers.map((s) => {
         let symbol = symbols[s.symbol]
 
@@ -145,14 +146,28 @@ class TranceTrader extends Component {
 
   render() {
     return (
+      <Router>
       <div className='app'>
-
-        <TransactionForm trans={this.state.trans} onSave={this.saveTransaction} />
-        <Portfolio
-          tickers={this.state.tickers}
-          onRemoveTicker={this.removeTicker}
-          />
+        <h1 className='app-title'>Trance Trader</h1>
+        <ul className='main-menu'>
+          <li>
+            <Link to='/stock/add'> + </Link>
+          </li>
+        </ul>
+        <Route exact path='/'
+          render={() =>
+            <Portfolio
+              tickers={this.state.tickers}
+              onRemoveTicker={this.removeTicker}
+          />} />
+        <Route path='/stock/add'
+          render={() =>
+            <TransactionForm
+              trans={this.state.trans}
+              onSave={this.saveTransaction} />
+        } />
       </div>
+      </Router>
     )
   }
 }
