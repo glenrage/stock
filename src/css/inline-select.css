@@ -1,0 +1,30 @@
+.inline-select {
+
+}
+
+.inline-select .option {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fafafa;
+    color: #8d8d8d;
+    font-weight: 300;
+}
+
+.inline-select .option:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.inline-select .option:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+.inline-select .option.selected {
+    background-color: #89b0f6;
+    color: #ffffff;
+}
+
+.inline-select label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: .9rem; 
+}

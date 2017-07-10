@@ -8,51 +8,46 @@ class Overlay extends Component {
         super(props);
 
         this.state = {
-            open: false
+            closing: false
         };
     }
 
-    toggle = () => {
-        if (this.state.open) {
+    close = () => {
             this.setState({
                 closing: true,
             }, () => {
                 setTimeout(() => {
                     this.setState({
-                        open: false,
                         closing: false
                     });
+                    this.props.onClose();
                 }, 250);
-            });
-        } else {
-            this.setState({
-                open: true
-            })
-        }
-
+          })
     }
 
     render() {
 
+        let isOpen = this.props.open;
+
         let overlayClasses = classnames({
             overlay: true,
-            open: this.state.open
+            open: isOpen
         });
 
         let contentsClass = classnames({
             contents: true,
             animated: true,
-            slideInUp: this.state.open && !this.state.closing,
+            slideInUp: isOpen && !this.state.closing,
             slideOutDown: this.state.closing
         });
 
         return (
            <div className={overlayClasses}>
                <div className={contentsClass}>
-                   <div className="wrapper">
+                   <div className='wrapper'>
                        <header>
-                           <h2 className="title">{this.props.title}</h2>
-                           <button className="close-overlay" onClick={this.close}>✕</button>
+                           <h2 className='title'>{this.props.title}</h2>
+                           <button className='close-overlay' onClick={this.close}>close overlay</button>
                        </header>
                        {this.props.children}
                    </div>

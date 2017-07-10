@@ -1,12 +1,14 @@
 import $ from 'jquery'
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import request from 'request';
+
 import './css/trance-trader.css';
 
 import Portfolio from './components/portfolio';
 import TransactionForm from './components/transaction-form';
 import NavBar from './components/nav-bar';
-import Overlay from './components/overlay'
+import Overlay from './components/overlay';
 
 const LOCAL_KEY = 'appState'
 const GOOG = 'https://finance.google.com/finance/info?q=';
@@ -30,7 +32,8 @@ class TranceTrader extends Component {
       tickers: [],
       trans: {},
   };
-    this.state.showForm = true;
+
+    this.state.showForm = false;
 
   }
 
@@ -38,9 +41,10 @@ class TranceTrader extends Component {
     this.retrieveMarketData();
   }
 
-  saveTransaction(trans) {
+  saveTransaction = (trans) => {
     let tickers = this.state.tickers;
     if(this.isValidTransaction(trans)) {
+      this.closeTransactionForm()
       trans.id = trans.id || this.guid();
       tickers.push(trans);
       this.setState({
@@ -53,28 +57,28 @@ class TranceTrader extends Component {
     }
   }
 
-  toggleTransactionForm(e) {
+  toggleTransactionForm = (e) => {
     e.preventDefault();
     this.setState({
       showForm: !this.state.showForm
     });
   }
 
-  showTransactionForm(e) {
+  showTransactionForm = (e) => {
+    console.log('show transform')
     e.preventDefault();
     this.setState({
       showForm: true
     })
   }
 
-  closeTransactionForm(e) {
-    e.preventDefault();
+  closeTransactionForm = () => {
     this.setState({
       showForm: false
     })
   }
 
-  removeTicker(id) {
+  removeTicker = (id) => {
     let tickers = this.state.tickers.filter((t) => t.id !== id);
     this.setState({
       tickers: tickers
@@ -83,43 +87,45 @@ class TranceTrader extends Component {
     });
   }
 
-  syncToStorage(state) {
+  syncToStorage = (state) => {
     if (!!state) {
       localStorage.setItem(LOCAL_KEY, JSON.stringify(state));
     }
   }
 
-  syncFromStorage() {
+  syncFromStorage = () => {
     return JSON.parse(localStorage.getItem('appState'))
   }
 
-  isValidTransaction(trans){
+  isValidTransaction = (trans) => {
     return trans.symbol.length > 0
       && trans.price > 0
       && trans.qty > 0
       && trans.date.length > 0
   }
 
-  isLocalHost() {
+  isLocalHost = () => {
     return (window.location.hostname === 'localhost');
   }
 
-  retrieveMarketData() {
+  retrieveMarketData = () => {
     let tickers = this.state.tickers;
     if (tickers.length > 0) {
 
       let url = GOOG + tickers.map((s) => `${s.symbol.toUpperCase()}`).join(',');
-  //     let options = this.isLocalHost() ? {} : {
-  //                mode: 'no-cors'};
-  //     fetch(url, options).then(r => r.text()).then((text) => {
-  //      if (text) {
-  //          text = text.substr(text.indexOf(prefix) + prefix.length);
-  //          text = text.trim();
-  //          this.updatePortfolio(JSON.parse(text));
-  //      }
-  //  }).catch((error) => {
-  //      console.error('Unable to fetch market data', error);
-  //  });
+      request(url, (error, response, body) => {
+                if(error) {
+                    console.error('Unable to fetch market data');
+                    return;
+                }
+                if (body) {
+                    body = body.substr(body.indexOf(prefix) + prefix.length);
+                    body = body.trim();
+                    this.updatePortfolio(JSON.parse(body));
+                }
+            });
+
+
       // $.ajax({
       //     url: url,
       //     jsonp: 'callback',
@@ -134,7 +140,7 @@ class TranceTrader extends Component {
     }
   }
 
-  updatePortfolio(data) {
+  updatePortfolio = (data) => {
     console.log('data : ' + data)
     if (data) {
       let symbols = data.reduce((note, s) => {
@@ -175,18 +181,22 @@ class TranceTrader extends Component {
   render() {
     return (
       <Router>
-        <div className="app">
+        <div className='app'>
+
           <NavBar />
           <div className='content'>
 
-        <Route exact path='/'
-          render={() =>
-            <Portfolio
-              tickers={this.state.tickers}
-              onAddTicker={this.showTransactionForm}
-              onRemoveTicker={this.removeTicker}
-          />} />
+            <Route exact path='/'render={() =>
+              <Portfolio
+                tickers={this.state.tickers}
+                onAddTicker={this.showTransactionForm}
+                onRemoveTicker={this.removeTicker}
+              />} />
           </div>
+
+          <button className='add-stock' onClick={this.showTransactionForm}>
+            {this.state.showForm ? '-' : '+'}
+          </button>
 
           <Overlay
             title='Add Stock'
@@ -194,7 +204,6 @@ class TranceTrader extends Component {
             onClose={this.closeTransactionForm}
             >
             <TransactionForm
-              open={this.state.showForm}
               trans={this.state.trans}
               onSave={this.saveTransaction}
               onClose={this.closeTransactionForm}

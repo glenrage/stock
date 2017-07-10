@@ -19,7 +19,7 @@ class EmptyPortfolio extends Component {
 class TickerPortfolio extends Component {
 
   render() {
-    console.log(this.props.tickers)
+
     let wealth = this.props.tickers.reduce((memo, s) => {
 
       console.log('wealth : ' + s)
@@ -38,7 +38,7 @@ class TickerPortfolio extends Component {
     });
 
     return (
-      <div className='portfolio'>
+
       <div className='ticker-portfolio'>
         <div className='wealth'>
           <p className='current'>
@@ -52,7 +52,6 @@ class TickerPortfolio extends Component {
           this.props.tickers.map((ticker) => <Ticker key={ticker.id} ticker={ticker} {...this.props} />)
         }
       </div>
-      </div>
     )
   }
 }
@@ -61,7 +60,7 @@ class Portfolio extends Component {
   render() {
 
     let elm = null;
-    if(this.props.tickers.length > 0 ) {
+    if (this.props.tickers.length > 0 ) {
       elm = <TickerPortfolio {...this.props} />
     } else {
       elm = <EmptyPortfolio {...this.props} />

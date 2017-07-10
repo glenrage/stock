@@ -48,28 +48,24 @@ table {
     border-spacing: 0;
 }
 
+html {
+    height: 100%;
+    width: 100%;
+}
+
 body {
     background-color: #DAE6F5;
-    width: 100vw;
-    height: 100vh;
-}
-
-.app-root {
-    width: 100vw;
-    height: 100vh;
-}
-
-.app {
-    position: relative;
-    color: #333333;
-    font-family: 'Roboto Condensed', sans-serif;
-    width: 100vw;
-    height: 100vh;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .animated {
     animation-duration: .2s;
     animation-fill-mode: both;
+}
+
+.animated.slow {
+    animation-duration: .5s;
 }
 
 @keyframes slideInUp {
@@ -100,4 +96,23 @@ body {
 
 .slideOutDown {
     animation-name: slideOutDown;
+}
+
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.zoomOut {
+    animation-name: zoomOut;
 }

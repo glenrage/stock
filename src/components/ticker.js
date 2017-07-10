@@ -9,7 +9,9 @@ class Ticker extends Component {
   constructor(props) {
     super(props);
 
-    this.removeTicker = this.removeTicker.bind(this)
+    this.state = {
+      deleted: false
+    }
   }
 
   daysOld(date) {
@@ -21,8 +23,14 @@ class Ticker extends Component {
     return Math.round(Math.abs((first.getTime() - second.getTime()) / (single)));
   }
 
-  removeTicker() {
-    this.props.onRemoveTicker(this.props.ticker.id);
+  deleteTicker(){
+    this.setState({
+      deleted: true
+    }, () => {
+      setTimeout(() => {
+        this.props.onDeleteTicker(this.props.ticker.id)
+      }, 600)
+    });
   }
 
   render() {
@@ -34,7 +42,7 @@ class Ticker extends Component {
 
     let daysOld = this.daysOld(ticker.date);
     let gains = Math.ceil((100 * profit) / cost);
-    let changeInPrice = ticker.currentPrice - ticker.price;
+    // let changeInPrice = ticker.currentPrice - ticker.price;
 
     let priceChangeClassNames = classnames({
       'volatile-value': true,
@@ -43,12 +51,12 @@ class Ticker extends Component {
       up: ticker.changePercent >= 0
     });
 
-    let changeInPriceClassNames = classnames({
-      'volatile-value': true,
-      'change-in-price': true,
-      down: changeInPrice < 0,
-      up: changeInPrice > 0
-    });
+    // let changeInPriceClassNames = classnames({
+    //   'volatile-value': true,
+    //   'change-in-price': true,
+    //   down: changeInPrice < 0,
+    //   up: changeInPrice > 0
+    // });
 
     let profitChangeClassNames = classnames({
       'volatile-value': true,
@@ -57,12 +65,19 @@ class Ticker extends Component {
       up: profit > 0
     });
 
+    let tickerClassNames = classnames({
+      stock: true,
+      animated: true,
+      zoomOut: this.state.deleted
+    })
+
+
     return (
-      <div className='ticker'>
+      <div className={tickerClassNames}>
         <div className='investment line-items'>
           <p className='bought-price'>
             {Helpers.currency(ticker.price)}
-            </p>
+          </p>
           <p className='cost'>
             {Helpers.currency(cost)}
           </p>
@@ -97,7 +112,7 @@ class Ticker extends Component {
 
         </div>
         <ul className='actions'>
-          <li onClick={this.removeTicker}>X</li>
+          <li onClick={this.deleteTicker}>X</li>
         </ul>
       </div>
     )
