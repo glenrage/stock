@@ -7,7 +7,8 @@
     padding: 10px 20px;
     background-color: #fafafa;
     color: #8d8d8d;
-    font-weight: 300;
+    font-weight: .9rem;
+    text-transform: uppercase;
 }
 
 .inline-select .option:first-child {
@@ -26,5 +27,5 @@
 .inline-select label {
   display: block;
   margin-bottom: 10px;
-  font-size: .9rem; 
+  font-size: .9rem;
 }

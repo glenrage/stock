@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import classnames from 'classnames';
-import '../css/ticker.css'
+import '../css/stock.css'
 import Gauge from './gauge';
 import Helpers from '../helpers'
 
-class Ticker extends Component {
+class Stock extends Component {
 
   constructor(props) {
     super(props);
@@ -23,36 +23,36 @@ class Ticker extends Component {
     return Math.round(Math.abs((first.getTime() - second.getTime()) / (single)));
   }
 
-  deleteTicker = () => {
+  deleteStock = () => {
     this.setState({
       deleted: true
     }, () => {
       setTimeout(() => {
-        this.props.onDeleteTicker(this.props.ticker.id)
+        this.props.onDeleteStock(this.props.stock.id)
       }, 600)
     });
   }
 
-  editTicker = () => {
-    this.props.onEditTicker(this.props.ticker)
+  editStock = () => {
+    this.props.onEditStock(this.props.stock)
   }
 
   render() {
-    let ticker = this.props.ticker;
+    let stock = this.props.stock;
 
-    let cost = ticker.qty * ticker.price;
-    let value = ticker.qty * ticker.currentPrice;
+    let cost = stock.quantity * stock.price;
+    let value = stock.quantity * stock.currentPrice;
     let profit = value - cost;
 
-    let daysOld = this.daysOld(ticker.date);
+    let daysOld = this.daysOld(stock.date);
     let gains = Math.ceil((100 * profit) / cost);
-    // let changeInPrice = ticker.currentPrice - ticker.price;
+    // let changeInPrice = stock.currentPrice - stock.price;
 
     let priceChangeClassNames = classnames({
       'volatile-value': true,
       'price-change': true,
-      down: ticker.changePercent < 0,
-      up: ticker.changePercent >= 0
+      down: stock.changePercent < 0,
+      up: stock.changePercent >= 0
     });
 
     let profitChangeClassNames = classnames({
@@ -62,7 +62,7 @@ class Ticker extends Component {
       up: profit > 0
     });
 
-    let tickerClassNames = classnames({
+    let stockClassNames = classnames({
       stock: true,
       animated: true,
       zoomOut: this.state.deleted
@@ -70,10 +70,10 @@ class Ticker extends Component {
 
 
     return (
-      <div className={tickerClassNames} onClick={this.editTicker}>
+      <div className={stockClassNames} onClick={this.editStock}>
         <div className='investment line-items'>
           <p className='bought-price'>
-            {Helpers.currency(ticker.price)}
+            {Helpers.currency(stock.price)}
           </p>
           <p className='cost'>
             {Helpers.currency(cost)}
@@ -86,13 +86,13 @@ class Ticker extends Component {
           <Gauge className='profit-meter' value={gains} />
           <div className='content'>
             <p className='symbol'>
-              {ticker.symbol}
+              {stock.symbol}
             </p>
             <p className='market-price'>
-              {Helpers.currency(ticker.currentPrice)}
+              {Helpers.currency(stock.currentPrice)}
             </p>
             <p className={priceChangeClassNames}>
-              {ticker.change}
+              {stock.change}
             </p>
           </div>
         </div>
@@ -109,11 +109,11 @@ class Ticker extends Component {
 
         </div>
         <ul className='actions'>
-          <li onClick={this.deleteTicker}>DEL</li>
+          <li onClick={this.deleteStock}>DEL</li>
         </ul>
       </div>
     )
   }
 }
 
-export default Ticker;
+export default Stock;

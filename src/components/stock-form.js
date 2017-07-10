@@ -1,69 +1,83 @@
 import React, {Component} from 'react';
-import '../css/transaction-form.css';
+import '../css/stock-form.css';
 import InlineSelect from './inline-select';
+import {actions, demo_stock, exchanges} from './data/constants'
 
-let demo_ticker = {
-  symbol: 'AMD',
-  price: '10',
-  quantity: '100',
-  date: '10/10/2010',
-  action: '',
-  exchange: ''
-};
-
-class Form extends Component {
+class StockForm extends Component {
 
   constructor(props){
     super(props)
 
     this.state = {
-      ticker: demo_ticker
+      closing: false,
+      stock: Object.assign({}, demo_stock, props.stock)
     }
+  }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      stock: Object.assign({}, nextProps.stock)
+    })
   }
 
   saveForm = (w) => {
     w.preventDefault()
 
     console.log('save form state :' + this.state)
-    return;
-    let trans = Object.assign({}, this.state);
+    let trans = Object.assign({}, this.state.stock);
     this.clearForm();
     this.props.onSave(trans)
   }
 
-  cancelForm = () => {
+  cancelForm = (e) => {
+    e.preventDefault();
     this.clearForm();
-    this.props.onCancel();
+    this.setState({
+      closing: true
+    }, () => {
+      setTimeout(() => {
+        this.props.onClose()
+      }, 300);
+    });
   }
 
   clearForm = () => {
     this.setState({
-      ticker: demo_ticker
+      stock: demo_stock
     })
   }
 
   handleInputChange = (e) => {
     console.log('about to change ', e.target.id)
+    let stock = {};
+    stock[e.target.id] = e.target.value;
+    this.setState({
+      stock: Object.assign({}, this.state.stock, stock)
+    });
   }
 
   handleActionSelect = (selected) => {
     console.log('selected ' + selected)
     this.setState({
-      action: selected
+      stock: Object.assign({}, this.state.stock, {
+        action: selected
+      })
     })
   }
 
   handleExchangeSelect = (selected) => {
     this.setState({
-      exchange: selected
+      stock: Object.assign({}, this.state.stock, {
+        exchange: selected
+      })
     })
   }
 
   render() {
-    let trans = this.state.trans || {};
+    let stock = this.state.stock
 
     return (
+      <div className='stock-form'>
         <form onSubmit={this.saveForm}>
 
           <ul className='fields'>
@@ -71,27 +85,26 @@ class Form extends Component {
               <InlineSelect
                 label='Action'
                 options={[{
-                  text: 'Bought',
-                  value: 'bought'
+                  text: actions.buy,
+                  value: actions.buy
                 }, {
-                  text: 'Sold',
-                  value: 'sold'
+                  text: actions.sell,
+                  value: actions.sell
                 }]}
-                selected={this.state.action}
-                onSelect={this.handleActionSelect}
+                selected={stock.action}
+                onSelect={this.handleActionSelect.bind(this)}
               />
             </li>
             <li className='field'>
               <InlineSelect
                 label='Exchange'
-                options={[{
-                  text: 'NYSE',
-                  value: 'NYSE'
-                }, {
-                  text: 'NASDAQ',
-                  value: 'NASDAQ'
-                }]}
-                selected={this.state.exchange}
+                options={
+                  Object.keys(exchanges).map((e) => ({
+                    text: exchanges[e],
+                    value: exchanges[e]
+                  }))
+                }
+                selected={stock.exchange}
                 onSelect={this.handleExchangeSelect}
               />
             </li>
@@ -101,10 +114,10 @@ class Form extends Component {
               <input
                 id='symbol'
                 type='text'
-                value={trans.symbol}
+                value={stock.symbol}
+                onChange={this.handleInputChange}
                 placeholder='Symbol'
                 className='symbol'
-
                 pattern='[a-zA-Z]+'
                 required='required'
               />
@@ -116,10 +129,10 @@ class Form extends Component {
         <input
           id='price'
           type='tel'
-          value={trans.price}
+          value={stock.price}
           placeholder='Price'
           className='price'
-
+          onChange={this.handleInputChange}
           pattern='^\d{0,8}(\.\d{1,4})?$'
           required='required'
         />
@@ -130,10 +143,10 @@ class Form extends Component {
         <input
           id='quantity'
           type='tel'
-          value={trans.qty}
+          value={stock.qty}
           placeholder='Qty'
           className='qty'
-
+          onChange={this.handleInputChange}
           pattern='^\d{0,8}$'
           required='required'
         />
@@ -144,10 +157,10 @@ class Form extends Component {
         <input
           id='date'
           type='text'
-          value={trans.date}
+          value={stock.date}
           placeholder='DD/MM/YYYY'
           className='date'
-
+          onChange={this.handleInputChange}
           pattern='\d{1,2}/\d{1,2}/\d{4}'
           required='required'
         />
@@ -156,62 +169,14 @@ class Form extends Component {
         </ul>
         <div className='cta-buttons'>
         <button className='secondary' onClick={this.cancelForm}>Cancel</button>
-        <button className='primary' type='submit'>Add</button>
+        <button className='primary' type='submit'>{this.props.mode === 'edit' ? 'save' : 'add'}</button>
         </div>
 
       </form>
+    </div>
 
     )
   }
 }
 
-Form.defaultProps = {
-  trans: {
-    id: '',
-    symbol: '',
-    price: '',
-    qty: '',
-    date: '',
-  }
-}
-
-class TransactionForm extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      closing: false
-    };
-
-  }
-
-  save = (trans) => {
-    this.props.onSave(trans)
-  }
-
-  close = () => {
-    this.setState({
-      closing: true
-    }, () => {
-        setTimeout(() => {
-          this.props.onClose()
-        }, 300)
-      })
-  }
-    render() {
-        return (
-          <div className='transaction-form'>
-          <Form
-            {...this.props}
-            onSave={this.save}
-            onCancel={this.close}
-          />
-          </div>
-        )
-  }
-}
-
-
-
-export default TransactionForm;
+export default StockForm;

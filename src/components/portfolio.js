@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import classnames from 'classnames';
-import Ticker from './ticker';
+import Stock from './stock';
 import Helpers from '../helpers'
 import '../css/portfolio.css'
 
@@ -10,21 +10,21 @@ class EmptyPortfolio extends Component {
     return (
       <div className='empty-portfolio'>
         Add stocks to your portfolio
-        <a href='#' onClick={this.props.onAddTicker}> + </a>
+        <button onClick={this.props.onAddStock}> add stock</button>
       </div>
     )
   }
 }
 
-class TickerPortfolio extends Component {
+class StockPortfolio extends Component {
 
   render() {
 
-    let wealth = this.props.tickers.reduce((memo, s) => {
+    let wealth = this.props.stocks.reduce((memo, s) => {
 
       console.log('wealth : ' + s)
-      memo.invested += (s.qty * s.price);
-      memo.current += (s.qty * s.currentPrice);
+      memo.invested += (s.quantity * s.price);
+      memo.current += (s.quantity * s.currentPrice);
       return memo;
     }, {invested: 0, current: 0});
 
@@ -39,7 +39,7 @@ class TickerPortfolio extends Component {
 
     return (
 
-      <div className='ticker-portfolio'>
+      <div className='stock-portfolio'>
         <div className='wealth'>
           <p className='current'>
             {Helpers.currency(wealth.current)}
@@ -49,7 +49,7 @@ class TickerPortfolio extends Component {
           </p>
         </div>
         {
-          this.props.tickers.map((ticker) => <Ticker key={ticker.id} ticker={ticker} {...this.props} />)
+          this.props.stocks.map((stock) => <Stock key={stock.id} stock={stock} {...this.props} />)
         }
       </div>
     )
@@ -60,8 +60,8 @@ class Portfolio extends Component {
   render() {
 
     let elm = null;
-    if (this.props.tickers.length > 0 ) {
-      elm = <TickerPortfolio {...this.props} />
+    if (this.props.stocks.length > 0 ) {
+      elm = <StockPortfolio {...this.props} />
     } else {
       elm = <EmptyPortfolio {...this.props} />
     }
