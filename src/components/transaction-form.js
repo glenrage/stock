@@ -2,23 +2,32 @@ import React, {Component} from 'react';
 import '../css/transaction-form.css';
 import InlineSelect from './inline-select';
 
+let demo_ticker = {
+  symbol: 'AMD',
+  price: '10',
+  quantity: '100',
+  date: '10/10/2010',
+  action: '',
+  exchange: ''
+};
+
 class Form extends Component {
 
   constructor(props){
     super(props)
 
-    this.state = {}
+    this.state = {
+      ticker: demo_ticker
+    }
 
   }
 
   saveForm = (w) => {
     w.preventDefault()
-    let trans = {
-      symbol: this.symbolElm.value || '',
-      price: this.priceElm.value || '',
-      qty: this.qtyElm.value || '',
-      date: this.dateElm.value || '',
-    };
+
+    console.log('save form state :' + this.state)
+    return;
+    let trans = Object.assign({}, this.state);
     this.clearForm();
     this.props.onSave(trans)
   }
@@ -29,10 +38,13 @@ class Form extends Component {
   }
 
   clearForm = () => {
-    this.symbolElm.value = '';
-    this.priceElm.value = '';
-    this.qtyElm.value = '';
-    this.dateElm.value = '';
+    this.setState({
+      ticker: demo_ticker
+    })
+  }
+
+  handleInputChange = (e) => {
+    console.log('about to change ', e.target.id)
   }
 
   handleActionSelect = (selected) => {
@@ -49,12 +61,12 @@ class Form extends Component {
   }
 
   render() {
-    let trans = this.props.trans || {};
+    let trans = this.state.trans || {};
 
     return (
         <form onSubmit={this.saveForm}>
 
-          <ul className='fields options'>
+          <ul className='fields'>
             <li className='field'>
               <InlineSelect
                 label='Action'
@@ -83,59 +95,63 @@ class Form extends Component {
                 onSelect={this.handleExchangeSelect}
               />
             </li>
-          </ul>
-          <ul className='fields inline'>
-            <li className='field'>
 
+          <li className='field'>
+          <div className='input-field'>
               <input
                 id='symbol'
                 type='text'
-                defaultValue={trans.symbol}
+                value={trans.symbol}
                 placeholder='Symbol'
                 className='symbol'
-                ref={(elm) => this.symbolElm = elm}
+
                 pattern='[a-zA-Z]+'
                 required='required'
               />
-            </li>
+            </div>
+          </li>
             <li className='field'>
+              <div className='input-field'>
 
         <input
           id='price'
           type='tel'
-          defaultValue={trans.price}
+          value={trans.price}
           placeholder='Price'
           className='price'
-          ref={(elm) => this.priceElm = elm}
+
           pattern='^\d{0,8}(\.\d{1,4})?$'
           required='required'
         />
+        </div>
         </li>
         <li className="field">
-
+          <div className='input-field'>
         <input
           id='quantity'
           type='tel'
-          defaultValue={trans.qty}
+          value={trans.qty}
           placeholder='Qty'
           className='qty'
-          ref={(elm) => this.qtyElm = elm}
+
           pattern='^\d{0,8}$'
           required='required'
         />
+        </div>
         </li>
         <li className='field'>
-
+          <div className='input-field'>
         <input
           id='date'
           type='text'
-          defaultValue={trans.date}
+          value={trans.date}
           placeholder='DD/MM/YYYY'
           className='date'
-          ref={(elm) => this.dateElm = elm}
+
           pattern='\d{1,2}/\d{1,2}/\d{4}'
           required='required'
         />
+        </div>
         </li>
         </ul>
         <div className='cta-buttons'>

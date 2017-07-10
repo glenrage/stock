@@ -72,6 +72,14 @@ class TranceTrader extends Component {
     })
   }
 
+  editTickerForm = (ticker) => {
+    this.setState({
+      showForm: true,
+      formMode: 'edit',
+      tickerToEdit: ticker
+    })
+  }
+
   closeTransactionForm = () => {
     this.setState({
       showForm: false
@@ -113,29 +121,33 @@ class TranceTrader extends Component {
     if (tickers.length > 0) {
 
       let url = GOOG + tickers.map((s) => `${s.symbol.toUpperCase()}`).join(',');
-      request(url, (error, response, body) => {
-                if(error) {
-                    console.error('Unable to fetch market data');
-                    return;
-                }
-                if (body) {
-                    body = body.substr(body.indexOf(prefix) + prefix.length);
-                    body = body.trim();
-                    this.updatePortfolio(JSON.parse(body));
-                }
-            });
-
-
-      // $.ajax({
-      //     url: url,
-      //     jsonp: 'callback',
-      //     dataType: 'jsonp',
-      //     success: (response) => {
-      //         if (response) {
-      //             this.updatePortfolio(response);
-      //         }
-      //     }
-      // });
+      // let options = {
+      //           url: url,
+      //           headers: {
+      //               'Origin': 'https://finance.google.com'
+      //           }
+      //       };
+      // request(options, (error, response, body) => {
+      //           if(error) {
+      //               console.error('Unable to fetch market data');
+      //               return;
+      //           }
+      //           if (body) {
+      //               body = body.substr(body.indexOf(prefix) + prefix.length);
+      //               body = body.trim();
+      //               this.updatePortfolio(JSON.parse(body));
+      //           }
+      //       });
+      $.ajax({
+          url: url,
+          jsonp: 'callback',
+          dataType: 'jsonp',
+          success: (response) => {
+              if (response) {
+                  this.updatePortfolio(response);
+              }
+          }
+      });
 
     }
   }
@@ -190,6 +202,7 @@ class TranceTrader extends Component {
               <Portfolio
                 tickers={this.state.tickers}
                 onAddTicker={this.showTransactionForm}
+                onEditTicker={this.editTickerForm}
                 onRemoveTicker={this.removeTicker}
               />} />
           </div>
@@ -204,7 +217,9 @@ class TranceTrader extends Component {
             onClose={this.closeTransactionForm}
             >
             <TransactionForm
-              trans={this.state.trans}
+              ticker={this.state.tickerToEdit || {}}
+              mode={this.state.formMode}
+
               onSave={this.saveTransaction}
               onClose={this.closeTransactionForm}
             />

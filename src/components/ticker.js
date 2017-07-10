@@ -23,7 +23,7 @@ class Ticker extends Component {
     return Math.round(Math.abs((first.getTime() - second.getTime()) / (single)));
   }
 
-  deleteTicker(){
+  deleteTicker = () => {
     this.setState({
       deleted: true
     }, () => {
@@ -31,6 +31,10 @@ class Ticker extends Component {
         this.props.onDeleteTicker(this.props.ticker.id)
       }, 600)
     });
+  }
+
+  editTicker = () => {
+    this.props.onEditTicker(this.props.ticker)
   }
 
   render() {
@@ -51,13 +55,6 @@ class Ticker extends Component {
       up: ticker.changePercent >= 0
     });
 
-    // let changeInPriceClassNames = classnames({
-    //   'volatile-value': true,
-    //   'change-in-price': true,
-    //   down: changeInPrice < 0,
-    //   up: changeInPrice > 0
-    // });
-
     let profitChangeClassNames = classnames({
       'volatile-value': true,
       'profit-change': true,
@@ -73,7 +70,7 @@ class Ticker extends Component {
 
 
     return (
-      <div className={tickerClassNames}>
+      <div className={tickerClassNames} onClick={this.editTicker}>
         <div className='investment line-items'>
           <p className='bought-price'>
             {Helpers.currency(ticker.price)}
@@ -112,7 +109,7 @@ class Ticker extends Component {
 
         </div>
         <ul className='actions'>
-          <li onClick={this.deleteTicker}>X</li>
+          <li onClick={this.deleteTicker}>DEL</li>
         </ul>
       </div>
     )

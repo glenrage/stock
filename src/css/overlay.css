@@ -15,6 +15,7 @@
 }
 
 .overlay.open {
+    transition: background-color .5s;
     height: 100%;
     display: flex;
     background-color: rgba(0, 0, 0, .5);
