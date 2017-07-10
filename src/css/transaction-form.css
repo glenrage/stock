@@ -1,37 +1,60 @@
 .transaction-form {
-  display: flex;
+    position: relative;
+    padding: 20px;
 }
 
-.transaction-form > * {
-  width: 20%;
+.transaction-form form {
+    width: 100%;
 }
 
-.input-field {
-  padding: 5px;
-  margin-right: 5px;
-  border: 1px solid #666;
+.transaction-form .fields {
+    margin-top: 10px;
 }
 
-.input-field:last-child {
-  margin-right: 0;
+.transaction-form .cta-buttons {
+    text-align: right;
 }
 
-.input-field.symbol {
-  width: 20%;
+.fields.inline {
+    display: flex;
 }
 
-.input-field.price {
-  width: 15%;
+.fields.inline .field {
+    display: block;
+    flex: 1;
 }
 
-.input-field.qty {
-  width: 10%;
+
+.fields.inline .field input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #7f8c8d;
+    font-size: .9rem;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
-.input-field.date {
-  width: 25%;
+.cta-buttons {
+    padding: 20px;
+    background-color: #efefef;
 }
 
-.input-field.btn {
-  width: 30px;
+.cta-buttons button {
+    border: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+}
+
+.cta-buttons .primary {
+    background-color: #3779f2;
+    font-size: 1.1rem;
+    color: #ffffff;
+    padding: 5px 20px;
+    border-radius: 3px;
+    margin-left: 20px;
+}
+
+.cta-buttons .secondary {
+    background-color: transparent;
+    font-size: 1rem;
+    color: #888;
 }

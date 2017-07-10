@@ -1,10 +1,12 @@
 import $ from 'jquery'
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './css/trance-trader.css';
 
 import Portfolio from './components/portfolio';
 import TransactionForm from './components/transaction-form';
+import NavBar from './components/nav-bar';
+import Overlay from './components/overlay'
 
 const LOCAL_KEY = 'appState'
 const GOOG = 'https://finance.google.com/finance/info?q=';
@@ -19,12 +21,16 @@ class TranceTrader extends Component {
     this.syncFromStorage = this.syncFromStorage.bind(this);
     this.retrieveMarketData = this.retrieveMarketData.bind(this);
     this.updatePortfolio = this.updatePortfolio.bind(this);
-    this.removeTicker = this.removeTicker.bind(this)
+    this.removeTicker = this.removeTicker.bind(this);
+    this.showTransactionForm = this.showTransactionForm.bind(this);
+    this.toggleTransactionForm = this.toggleTransactionForm.bind(this);
+    this.closeTransactionForm = this.closeTransactionForm.bind(this);
 
     this.state = (this.syncFromStorage()) || {
       tickers: [],
-      trans: {}
+      trans: {},
   };
+    this.state.showForm = true;
 
   }
 
@@ -40,10 +46,32 @@ class TranceTrader extends Component {
       this.setState({
         tickers: tickers,
         trans: {}
+      }, () => {
+        this.syncToStorage(this.state);
+        this.retrieveMarketData();
       });
-      this.syncToStorage(this.state);
-      this.retrieveMarketData();
     }
+  }
+
+  toggleTransactionForm(e) {
+    e.preventDefault();
+    this.setState({
+      showForm: !this.state.showForm
+    });
+  }
+
+  showTransactionForm(e) {
+    e.preventDefault();
+    this.setState({
+      showForm: true
+    })
+  }
+
+  closeTransactionForm(e) {
+    e.preventDefault();
+    this.setState({
+      showForm: false
+    })
   }
 
   removeTicker(id) {
@@ -147,26 +175,32 @@ class TranceTrader extends Component {
   render() {
     return (
       <Router>
-      <div className='app'>
-        <h1 className='app-title'>Trance Trader</h1>
-        <ul className='main-menu'>
-          <li>
-            <Link to='/stock/add'> + </Link>
-          </li>
-        </ul>
+        <div className="app">
+          <NavBar />
+          <div className='content'>
+
         <Route exact path='/'
           render={() =>
             <Portfolio
               tickers={this.state.tickers}
+              onAddTicker={this.showTransactionForm}
               onRemoveTicker={this.removeTicker}
           />} />
-        <Route path='/stock/add'
-          render={() =>
+          </div>
+
+          <Overlay
+            title='Add Stock'
+            open={this.state.showForm}
+            onClose={this.closeTransactionForm}
+            >
             <TransactionForm
+              open={this.state.showForm}
               trans={this.state.trans}
-              onSave={this.saveTransaction} />
-        } />
-      </div>
+              onSave={this.saveTransaction}
+              onClose={this.closeTransactionForm}
+            />
+          </Overlay>
+        </div>
       </Router>
     )
   }

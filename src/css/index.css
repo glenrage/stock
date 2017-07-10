@@ -48,29 +48,56 @@ table {
     border-spacing: 0;
 }
 
-html {
-    height: 100%;
-    width: 100%;
-}
-
-input:required {
-    box-shadow: none;
-}
-
-input:invalid {
-    box-shadow: none;
-}
-
-button {
-    cursor: pointer;
-}
-
 body {
-    background-color: #gray;
-    min-width: 100%;
-    min-height: 100%;
+    background-color: #DAE6F5;
+    width: 100vw;
+    height: 100vh;
 }
 
-input:focus {
-    outline: none;
+.app-root {
+    width: 100vw;
+    height: 100vh;
+}
+
+.app {
+    position: relative;
+    color: #333333;
+    font-family: 'Roboto Condensed', sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+.animated {
+    animation-duration: .2s;
+    animation-fill-mode: both;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translate3d(0, 100%, 0);
+        visibility: visible;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.slideInUp {
+    animation-name: slideInUp;
+}
+
+@keyframes slideOutDown {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        transform: translate3d(0, 100%, 0);
+    }
+}
+
+.slideOutDown {
+    animation-name: slideOutDown;
 }

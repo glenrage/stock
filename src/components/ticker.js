@@ -85,8 +85,8 @@ class Ticker extends Component {
           </div>
         </div>
         <div className='return line-items'>
-          <p className={changeInPriceClassNames}>
-            {(ticker.currentPrice - ticker.price).toFixed(2)}
+          <p className={profitChangeClassNames}>
+            {gains}%
           </p>
           <p className='current-value'>
             {Helpers.currency(value)}
