@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 
 import classnames from 'classnames';
+import NetWorthMeter from './networth-meter';
 import Stock from './stock';
-import Helpers from '../helpers'
-import '../css/portfolio.css'
+import Helpers from '../helpers';
+import '../css/portfolio.css';
 
 class EmptyPortfolio extends Component {
   render() {
@@ -41,6 +42,7 @@ class StockPortfolio extends Component {
 
       <div className='stock-portfolio'>
         <div className='wealth'>
+          <NetWorthMeter wealth={wealth} stocks={this.props.stocks}/>
           <p className='current'>
             {Helpers.currency(wealth.current)}
           </p>
@@ -48,7 +50,13 @@ class StockPortfolio extends Component {
             {wealthChange.toLocaleString()}
           </p>
           <ul>
-            <button onClick={this.props.onToggleStockMode}>toggle</button>
+            <li>
+              <button onClick={this.props.onToggleStockMode}>Switch Views</button>
+            </li>
+            <li>
+              <button onClick={this.props.onAddStock}>Add</button>
+            </li>
+
           </ul>
         </div>
         {
