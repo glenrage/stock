@@ -1,0 +1,36 @@
+.stock-summary {
+    display: flex;
+    color: #4d4d4d;
+}
+
+.stock-summary .column {
+    flex: 1;
+    text-align: left;
+}
+
+.stock-summary .column:first-child {
+    padding-left: 20px;
+}
+
+.stock-summary .column:last-child {
+    padding-right: 20px;
+}
+
+.stock-summary .symbol {
+    font-size: 1rem;
+}
+
+.stock-summary .price .current {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.stock-summary .profit .current {
+    font-size: 1rem;
+}
+
+.stock-summary .volatile-value {
+    margin-top: 10px;
+    font-size: .9rem;
+    display: block;
+}

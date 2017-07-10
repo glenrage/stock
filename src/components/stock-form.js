@@ -31,14 +31,7 @@ class StockForm extends Component {
 
   cancelForm = (e) => {
     e.preventDefault();
-    this.clearForm();
-    this.setState({
-      closing: true
-    }, () => {
-      setTimeout(() => {
-        this.props.onClose()
-      }, 300);
-    });
+    this.props.onClose()
   }
 
   clearForm = () => {

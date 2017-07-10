@@ -16,3 +16,8 @@ export const demo_stock = {
   action: 'actions.buy',
   exchange: 'exchanges.nasdaq'
 };
+
+export const stock_mode = {
+  summary: 'summary',
+  detail: 'detail'
+}

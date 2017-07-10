@@ -1,10 +1,10 @@
 import $ from 'jquery'
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import request from 'request';
+
 
 import './css/trance-trader.css';
-import {demo_stock} from './components/data/constants';
+import {demo_stock, stock_mode} from './components/data/constants';
 
 import Portfolio from './components/portfolio';
 import StockForm from './components/stock-form';
@@ -31,7 +31,8 @@ class TranceTrader extends Component {
 
     this.state = Object.assign({
       stocks: [],
-      stockToEdit: demo_stock
+      stockToEdit: demo_stock,
+      stockMode: stock_mode.detail
     }, this.syncFromStorage(), {
       showForm: false
     })
@@ -103,10 +104,23 @@ class TranceTrader extends Component {
     });
   }
 
-  syncToStorage = (state) => {
-    if (!!state) {
-      localStorage.setItem(LOCAL_KEY, JSON.stringify(state));
+  toggleStockMode = () => {
+    let mode = this.state.stockMode;
+    if (mode === stock_mode.summary) {
+      mode = stock_mode.detail;
+    } else {
+      mode = stock_mode.summary
     }
+    this.setState({
+      stockMode: mode
+    }, () => {
+      this.syncToStorage(this.state)
+    })
+  }
+
+  syncToStorage = (state) => {
+    state = state || this.state;
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(state));
   }
 
   syncFromStorage = () => {
@@ -192,14 +206,16 @@ class TranceTrader extends Component {
             <Route exact path='/'render={() =>
               <Portfolio
                 stocks={this.state.stocks}
+                stockMode={this.state.stockMode}
                 onAddStock={this.addStockForm}
                 onEditStock={this.editStockForm}
                 onRemoveStock={this.removeStock}
+                onToggleStockMode={this.toggleStockMode}
               />} />
           </div>
 
           <button className='add-stock' onClick={this.addStockForm}>
-            {this.state.showForm ? '-' : '+'}
+            add stock
           </button>
 
           <Overlay

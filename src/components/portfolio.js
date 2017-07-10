@@ -47,6 +47,9 @@ class StockPortfolio extends Component {
           <p className={wealthChangeClassNames}>
             {wealthChange.toLocaleString()}
           </p>
+          <ul>
+            <button onClick={this.props.onToggleStockMode}>toggle</button>
+          </ul>
         </div>
         {
           this.props.stocks.map((stock) => <Stock key={stock.id} stock={stock} {...this.props} />)

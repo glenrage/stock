@@ -1,0 +1,63 @@
+.stock-detail {
+    margin: 0 auto;
+    width: 90%;
+    border-radius: 5px;
+    background-color: #3b4044;
+    color: #9d9d9d;
+}
+
+.stock-detail .columns {
+    display: flex;
+    max-height: 140px;
+    height: 140px;
+}
+
+.stock-detail .column {
+    flex: 1;
+    align-self: center;
+    text-align: center;
+}
+
+.stock-detail .symbol,
+.stock-detail .investment {
+    font-size: .9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: #cacaca;
+}
+
+.stock-detail .current-price,
+.stock-detail .current-worth {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #D4AF37;
+}
+
+.stock-detail .price-change,
+.stock-detail .profit-change {
+    margin-top: 20px;
+}
+
+.stock-detail .investment [class^="icon-"],
+.stock-detail .investment [class*=" icon-"] {
+    font-size: .6rem;
+    color: #9d9d9d;
+}
+
+.investment em {
+    margin-right: 20px;
+}
+
+.investment em:last-child {
+    margin-right: 0;
+}
+
+.title {
+    text-align: center;
+    font-size: .7rem;
+    padding: 5px 0;
+    letter-spacing: 1pt;
+    color: #626b71;
+    text-transform: uppercase;
+}
