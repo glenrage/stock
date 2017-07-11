@@ -16,6 +16,7 @@ git clone https://github.com/glenrage/trance-trader.git
 cd trance-trader
 ```
 
+```
 npm i
 npm run start
 ```
@@ -27,7 +28,8 @@ Open your browser to http://localhost:3000
 Tests coming soon
 
 ```
-npm run test
+npm run
+
 ```
 
 ## Built With
