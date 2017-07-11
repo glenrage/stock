@@ -44,13 +44,17 @@ npm run
 
 
 
-## Versioning
+## Todos
+* [ ] Refactor API to retrieve data from multiple markets
+* [ ] Store portfolio data for persistance
+* [ ] Passport login for social media
+
 
 
 
 ## Authors
 
-* **Glen Pham** - *Initial work* - [glenrage](http://www.glenrage.com)
+* **Glen Pham** - [glenrage](http://www.glenrage.com)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 

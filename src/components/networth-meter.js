@@ -12,11 +12,11 @@ let gap = 10;
 let innerRadius = radius - gap;
 let net_worth_meter = 180;
 
-let angleInRadians = angleInDegrees => -angleInDegrees * Math.PI / 180.0;
-let arcXY = (cx, cy, r, radians) => ({
-  x: cx + r * Math.cos(radians),
-  y: cy + r * Math.sin(radians)
-});
+// let angleInRadians = angleInDegrees => -angleInDegrees * Math.PI / 180.0;
+// let arcXY = (cx, cy, r, radians) => ({
+//   x: cx + r * Math.cos(radians),
+//   y: cy + r * Math.sin(radians)
+// });
 
 class NetWorthMeter extends Component {
 
@@ -37,7 +37,6 @@ class NetWorthMeter extends Component {
     }, 0);
 
     let innerCircle = Helpers.arcXY(centerX, centerY, innerRadius, Helpers.angleInRadians(180));
-
     let netWorthChange = netWorth.current - netWorth.invested;
     let indicator = netWorthChange >= 0
       ? '▲'
