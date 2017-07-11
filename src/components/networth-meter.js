@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import '../css/networth-meter.css';
+import classnames from 'classnames';
 import colors from './data/colors';
+import Helpers from '../helpers'
+import '../css/networth-meter.css';
 
 let size = 300;
 let centerX = size / 2;
 let centerY = size / 2;
 let radius = size / 2;
+let gap = 10;
+let innerRadius = radius - gap;
 let net_worth_meter = 180;
 
 let angleInRadians = angleInDegrees => -angleInDegrees * Math.PI / 180.0;
