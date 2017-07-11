@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import '../css/stock-form.css';
+import AutoSuggest from 'react-autosuggest';
 import InlineSelect from './inline-select';
 import {actions, demo_stock, exchanges} from './data/constants'
+
+import '../css/stock-form.css';
 
 class StockForm extends Component {
 
@@ -22,7 +24,6 @@ class StockForm extends Component {
 
   saveForm = (w) => {
     w.preventDefault()
-
     console.log('save form state :' + this.state)
     let trans = Object.assign({}, this.state.stock);
     this.clearForm();
@@ -32,13 +33,41 @@ class StockForm extends Component {
   cancelForm = (e) => {
     e.preventDefault();
     this.props.onClose()
-  }
+  };
 
   clearForm = () => {
     this.setState({
       stock: demo_stock
     })
+  };
+
+  deleteStock = (e) => {
+    e.preventDeafult();
+    this.props.onDelete(this.props.stock.id);
+  };
+
+  getDateFunc = () => {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    let yyyy = today.getFullYear();
+
+    if(dd < 10) {
+      dd = '0' + dd;
+    }
+    if(mm < 10) {
+      mm = '0' + mm;
+    }
+    return dd + '/' + mm + '/' + yyyy;
   }
+
+  injectDate = () = {
+    let stock = this.state.stock;
+    stock.date = this.getDateFunc();
+    this.setState = ({
+      stock
+    });
+  };
 
   handleInputChange = (e) => {
     console.log('about to change ', e.target.id)
