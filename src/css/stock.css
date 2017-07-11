@@ -1,16 +1,11 @@
 .stock {
     position: relative;
     background-color: #ffffff;
-    box-shadow: 0 1px 2px #eee;
-    border: 1px solid #eeeeee;
-    border-radius: 3px;
-    margin-top: 10px;
     padding: 10px 0;
 }
 
-.stock > * {
-    flex: 1;
-    text-align: center;
+.stock: first-child {
+    margin-top: 0
 }
 
 .details {
@@ -35,27 +30,19 @@
     font-size: 1.4rem;
     font-weight: 300;
     margin-top: 10px;
+    color: red;
 }
 .price-change {
     font-size: .8rem;
     margin-top: 5px;
 }
 
-.details .progress {
-    transform: rotate(-90deg);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-}
-
 .details .content {
+    transform: translate(-50%, -50%);
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
 }
-
 
 .investment .cost {
     font-size: 1.5rem;
@@ -110,10 +97,6 @@
 
 .return .current-value {
     font-size: 1.5rem;
-}
-
-.line-items p {
-    margin-top: 15px;
 }
 
 .actions {

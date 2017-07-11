@@ -1,15 +1,12 @@
 import $ from 'jquery'
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-
-
-import './css/trance-trader.css';
-import {demo_stock, stock_mode} from './components/data/constants';
-
 import Portfolio from './components/portfolio';
 import StockForm from './components/stock-form';
 import NavBar from './components/nav-bar';
 import Overlay from './components/overlay';
+import {demo_stock, stock_mode} from './components/data/constants';
+import './css/trance-trader.css';
 
 const LOCAL_KEY = 'appState'
 const GOOG = 'https://finance.google.com/finance/info?q=';
@@ -19,15 +16,6 @@ class TranceTrader extends Component {
 
   constructor(props) {
     super(props)
-
-    // this.saveTransaction = this.saveTransaction.bind(this);
-    // this.syncFromStorage = this.syncFromStorage.bind(this);
-    // this.retrieveMarketData = this.retrieveMarketData.bind(this);
-    // this.updatePortfolio = this.updatePortfolio.bind(this);
-    // this.removeTicker = this.removeTicker.bind(this);
-    // this.showStockForm = this.showStockForm.bind(this);
-    // this.toggleStockForm = this.toggleStockForm.bind(this);
-    // this.closeStockForm = this.closeStockForm.bind(this);
 
     this.state = Object.assign({
       stocks: [],

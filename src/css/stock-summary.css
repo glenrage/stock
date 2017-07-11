@@ -28,12 +28,15 @@
 }
 
 .stock-summary .price .current {
+    color: #D4AF37;
     font-size: 1rem;
     font-weight: 300;
 }
 
 .stock-summary .profit .current {
     font-size: 1rem;
+    color: #D4AF37;
+    letter-spacing: 1px;
 }
 
 .stock-summary .volatile-value {
