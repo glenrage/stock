@@ -26,8 +26,8 @@ class StockPortfolio extends Component {
 
   render() {
 
-    let wealth = this.props.stocks.reduce((memo, s) => {
-      console.log('wealth : ' + s)
+    let netWorth = this.props.stocks.reduce((memo, s) => {
+      console.log('netWorth : ' + s)
       memo.invested += (s.quantity * s.price);
       memo.current += (s.quantity * s.currentPrice);
       return memo;
@@ -36,8 +36,8 @@ class StockPortfolio extends Component {
     return (
 
       <div className='stock-portfolio'>
-        <div className='wealth'>
-          <NetWorthMeter wealth={wealth} stocks={this.props.stocks}/>
+        <div className='netWorth'>
+          <NetWorthMeter netWorth={netWorth} stocks={this.props.stocks}/>
         </div>
         {
           this.props.stocks.map((stock) => <Stock key={stock.id} stock={stock} {...this.props} />)

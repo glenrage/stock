@@ -1,18 +1,18 @@
-.wealth {
+.netWorth {
     margin-top: 10px;
     text-align: center;
 }
 
-.wealth-info {
+.netWorth-info {
     background-color: #fafafa;
     padding: 20px 0;
 }
 
-.wealth-info .current {
+.netWorth-info .current {
     font-size: 2rem;
 }
 
-.wealth-info .wealth-change {
+.netWorth-info .netWorth-change {
     font-size: .8rem;
     margin-top: 5px;
 }

@@ -38,7 +38,7 @@ class StockForm extends Component {
   };
 
   deleteStock = (e) => {
-    e.preventDeafult();
+    e.preventDefault();
     this.props.onDelete(this.props.stock.id);
   };
 
