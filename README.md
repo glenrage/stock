@@ -1,67 +1,46 @@
 # Trance Trader
 
-Trance Trader is a stock market portfolio app where users can build a portfolio of their own stocks. They can simulate stock market trades and view their portfolio value.
+Trance Trader is a stock market portfolio app where users can build a portfolio of their own stocks. They can simulate stock market trades and view their portfolio value. Deployed application coming soon.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+Click on sample portfolio to get a pre generated portfolio with stocks or create your own by clicking add stock.
+You can expand views in the nav bar up top. To add a stock click add and insert ticker symbol, add in a price bought at, quantity, as well as date purchased. The Portfolio Value will change based on gains or losses against real time market data.
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+Git clone the project.
 
 ```
-Give the example
+git clone https://github.com/glenrage/trance-trader.git
+cd trance-trader
 ```
 
-And repeat
-
-```
-until finished
+npm i
+npm run start
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Open your browser to http://localhost:3000
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Tests coming soon
 
 ```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+npm run test
 ```
 
 ## Built With
 
-* [REACT](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [EXPRESS](https://maven.apache.org/) - Dependency Management
-* [NODE](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-* [MONGODB](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [REACT]
+* [EXPRESS]
+* [NODE]
+* [MONGODB]
+* [CREATE - REACT - APP]
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
 
 ## Versioning
 
@@ -69,7 +48,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Authors
 
-* **Glen Pham** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Glen Pham** - *Initial work* - [glenrage](http://www.glenrage.com)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
@@ -78,7 +57,3 @@ See also the list of [contributors](https://github.com/your/project/contributors
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
