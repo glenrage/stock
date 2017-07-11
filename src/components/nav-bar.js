@@ -11,14 +11,14 @@ class NavBar extends Component {
 			toggleElm = (
 				<button onClick={this.props.onToggleStockMode}>
 					<span className="icon-compress" />
-					<i>Short</i>
+					<i>Minimize Portfolio</i>
 				</button>
 			);
 		} else {
 			toggleElm = (
 				<button onClick={this.props.onToggleStockMode}>
 					<span className="icon-expand" />
-					<i>Detail</i>
+					<i>Expand Portfolio</i>
 				</button>
 			);
 		}
@@ -29,7 +29,7 @@ class NavBar extends Component {
 					<li>
 						<button onClick={this.props.onReload}>
 							<span className="icon-refresh" />
-							<i>refresh</i>{' '}
+							<i>Refresh</i>
 						</button>
 					</li>
 					<li>

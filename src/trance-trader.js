@@ -19,12 +19,12 @@ class TranceTrader extends Component {
 
     this.state = Object.assign({
       stocks: [],
-      stockToEdit: demo_stock,
       stockMode: stock_mode.detail
     }, this.syncFromStorage(), {
-      showForm: false
+      formMode: '',
+      showForm: false,
+      stockToEdit: demo_stock,
     })
-
   }
 
   componentWillMount() {
@@ -41,13 +41,14 @@ class TranceTrader extends Component {
       } else {
         stocks = stocks.map((stock) => {
           if (stock.id === trans.id) {
-            return trans
+            return trans;
           }
-          return stock
+          return stock;
         });
       }
       this.setState({
         stocks: stocks,
+        stockToEdit: demo_stock
       }, () => {
         this.syncToStorage(this.state);
         this.retrieveMarketData();
@@ -63,10 +64,9 @@ class TranceTrader extends Component {
   }
 
   addStockForm = (e) => {
-    console.log('add form')
     this.setState({
       showForm: true
-    })
+    });
   }
 
   editStockForm = (stock) => {
@@ -79,16 +79,19 @@ class TranceTrader extends Component {
 
   closeStockForm = () => {
     this.setState({
-      showForm: false
-    })
+      showForm: false,
+      stockToEdit: demo_stock,
+      formMode: ''
+    });
   }
 
-  removeStock = (id) => {
+  deleteStock = (id) => {
     let stocks = this.state.stocks.filter((t) => t.id !== id);
     this.setState({
       stocks: stocks
     }, () => {
-      this.syncToStorage(this.state)
+      this.closeStockForm();
+      this.syncToStorage(this.state);
     });
   }
 
@@ -102,8 +105,8 @@ class TranceTrader extends Component {
     this.setState({
       stockMode: mode
     }, () => {
-      this.syncToStorage(this.state)
-    })
+      this.syncToStorage(this.state);
+    });
   }
 
   syncToStorage = (state) => {
@@ -141,37 +144,35 @@ class TranceTrader extends Component {
               }
           }
       });
-
     }
   }
 
   updatePortfolio = (data) => {
-    console.log('data : ' + data)
     if (data) {
       let symbols = data.reduce((note, s) => {
         note[s.t] = s;
         return note;
       }, {});
-      console.log('symbols :' + symbols)
       let stocks = this.state.stocks.map((s) => {
         let symbol = symbols[s.symbol]
-
         if(symbol) {
           s['currentPrice'] = symbol.l;
           s['change'] = symbol.c;
           s['changePercent'] = symbol.cp;
           return s;
         } else {
-          console.log('s.symbol : ' + s.symbol)
           return {}
         }
-
       });
       this.setState({
         stocks: stocks
       });
       this.syncToStorage(this.state);
     }
+  }
+
+  refresh = () => {
+    this.retrieveMarketData();
   }
 
   guid() {
@@ -182,30 +183,28 @@ class TranceTrader extends Component {
         });
     }
 
-
   render() {
     return (
-      <Router>
+      <Router basename='/trader'>
         <div className='app'>
 
-          <NavBar />
+          <NavBar
+            stockMode={this.state.stockMode}
+            onAddStock={this.addStockForm}
+            onToggleStockMode={this.toggleStockMode}
+            onReload={this.reload}
+          />
           <div className='content'>
-
             <Route exact path='/'render={() =>
               <Portfolio
                 stocks={this.state.stocks}
                 stockMode={this.state.stockMode}
                 onAddStock={this.addStockForm}
                 onEditStock={this.editStockForm}
-                onRemoveStock={this.removeStock}
+                onDeleteStock={this.deleteStock}
                 onToggleStockMode={this.toggleStockMode}
               />} />
           </div>
-
-          <button className='add-stock' onClick={this.addStockForm}>
-            add stock
-          </button>
-
           <Overlay
             title={this.state.formMode === 'edit' ? 'Edit Stock' : 'Add Stock'}
             open={this.state.showForm}
@@ -214,9 +213,9 @@ class TranceTrader extends Component {
             <StockForm
               stock={this.state.stockToEdit}
               mode={this.state.formMode}
-
               onSave={this.saveTransaction}
               onClose={this.closeStockForm}
+              onDelete={this.deleteStock}
             />
           </Overlay>
         </div>

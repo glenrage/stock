@@ -9,8 +9,8 @@
 }
 
 .nav-title {
-    font-size: 1.2rem;
-    font-weight: 300;
+    font-size: 1.5em;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2pt;
 }
@@ -43,11 +43,11 @@
 .portfolio-actions [class^="icon-"],
 .portfolio-actions [class*=" icon-"] {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.5em;
 }
 
 .portfolio-actions i {
-    font-size: .5rem;
+    font-size: 1em;
     text-transform: uppercase;
     letter-spacing: 1pt;
 }
