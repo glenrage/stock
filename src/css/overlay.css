@@ -1,9 +1,13 @@
 .overlay {
     position: fixed;
     width: 100%;
+    max-width: 600px;
     bottom: 0;
     z-index: 1000;
-    transition: background-color .2s;
+}
+
+.overlay.open {
+    transition: background-color 0.5s;
 }
 
 .overlay .wrapper {
@@ -11,14 +15,18 @@
 }
 
 .overlay .contents {
-    background-color: #ffffff;
+    background-color: #c3c8cb;
 }
 
 .overlay.open {
-    transition: background-color .5s;
     height: 100%;
     display: flex;
     background-color: rgba(0, 0, 0, .5);
+    transition: background-color 0.5s;
+}
+
+.overlay.closing {
+    background-color: rgba(0,0,0,0);
 }
 
 .overlay.open .contents {
@@ -34,8 +42,9 @@
 .overlay header {
     position: relative;
     padding: 20px 0;
-    border-bottom: 1px solid #3779f2;
-    background-color: #3779f2;
+    background-color: #212121;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
 }
 
 .overlay .title {
