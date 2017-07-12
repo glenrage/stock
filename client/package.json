@@ -4,7 +4,8 @@
   "description": "Stock market portfolio app built with React",
   "private": true,
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "eslint-plugin-import": "^2.7.0",
+    "react-scripts": "1.0.10"
   },
   "scripts": {
     "start": "react-scripts start",
