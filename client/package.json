@@ -2,10 +2,10 @@
   "name": "stock",
   "version": "1.0.0",
   "description": "Stock market portfolio app built with React",
- "private": true,
- "devDependencies": {
-   "react-scripts": "1.0.7"
- },
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "1.0.7"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -29,7 +29,6 @@
     "react-router-dom": "^4.1.1",
     "request": "^2.81.0"
   },
-
   "proxy": "http://localhost:3001",
   "homepage": "https://github.com/glenrage/stock#readme"
 }
