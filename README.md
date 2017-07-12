@@ -1,3 +1,8 @@
+"eslint-plugin-flowtype": "^2.35.0",
+"eslint-plugin-import": "^2.7.0",
+"eslint-plugin-jsx-a11y": "^6.0.2",
+"eslint-plugin-react": "^7.1.0",
+
 # Trance Trader
 
 Trance Trader is a stock market portfolio app where users can build a portfolio of their own stocks. They can simulate stock market trades and view their portfolio value. Deployed application coming soon.
