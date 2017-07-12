@@ -1,34 +1,24 @@
 {
-  "name": "react-backend",
-  "version": "0.0.0",
-  "devDependencies": {
-    "react-scripts": "^1.0.10"
-  },
+  "name": "trance-trader",
+  "version": "1.0.0",
+  "description": "Trance Trader is a stock market portfolio app where users can build a portfolio of their own stocks. They can simulate stock market trades and view their portfolio value. Deployed application coming soon.",
   "engines": {
     "node": "6.11.x"
   },
   "scripts": {
     "start": "node server",
-    "watch": "nodemon server",
     "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "cacheDirectories": [
     "node_modules",
     "client/node_modules"
   ],
+  "dependencies": {
+    "express": "^4.14.1"
+  },
   "repository": {
     "type": "git",
     "url": ""
-  },
-  "dependencies": {
-    "body-parser": "~1.17.1",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.3",
-    "eslint-plugin-import": "^2.7.0",
-    "express": "~4.15.2",
-    "jade": "~1.11.0",
-    "morgan": "~1.8.1",
-    "serve-favicon": "~2.4.2"
   },
   "keywords": [
     "node",
@@ -36,5 +26,6 @@
     "create-react-app",
     "react"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {}
 }
