@@ -1,7 +1,7 @@
 {
-  "name": "trance-trader",
+  "name": "Trance-Trader",
   "version": "1.0.0",
-  "description": "Trance Trader is a stock market portfolio app where users can build a portfolio of their own stocks. They can simulate stock market trades and view their portfolio value. Deployed application coming soon.",
+  "description": "How to use create-react-app with a custom Node API on Heroku",
   "engines": {
     "node": "6.11.x"
   },
@@ -14,15 +14,11 @@
     "client/node_modules"
   ],
   "dependencies": {
-    "eslint": "^4.2.0",
-    "eslint-plugin-flowtype": "^2.35.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
     "express": "^4.14.1"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/glenrage-trance-trader.git"
   },
   "keywords": [
     "node",
