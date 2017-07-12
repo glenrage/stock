@@ -2,7 +2,10 @@
   "name": "stock",
   "version": "1.0.0",
   "description": "Stock market portfolio app built with React",
-  "main": "index.js",
+ "private": true,
+ "devDependencies": {
+   "react-scripts": "1.0.7"
+ },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -19,7 +22,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "eslint-plugin-import": "^2.7.0",
     "jquery": "^3.2.1",
     "react": "^15.5.4",
     "react-autosuggest": "^9.3.1",
@@ -27,9 +29,7 @@
     "react-router-dom": "^4.1.1",
     "request": "^2.81.0"
   },
-  "devDependencies": {
-    "react-scripts": "1.0.7"
-  },
+
   "proxy": "http://localhost:3001",
   "homepage": "https://github.com/glenrage/stock#readme"
 }
