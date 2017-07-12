@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import AutoSuggest from 'react-autosuggest';
 import InlineSelect from './inline-select';
 import {actions, demo_stock, exchanges} from './data/constants'
-
 import '../css/stock-form.css';
 
 class StockForm extends Component {
@@ -22,7 +21,6 @@ class StockForm extends Component {
 
   saveForm = (w) => {
     w.preventDefault()
-    console.log('save form state :' + this.state)
     let trans = Object.assign({}, this.state.stock);
     this.clearForm();
     this.props.onSave(trans)
@@ -64,14 +62,12 @@ class StockForm extends Component {
   };
 
   handleInputChange = (e) => {
-    console.log('about to change ', e.target.id)
     let stock = {};
     stock[e.target.id] = e.target.value;
     this.setState({stock: Object.assign({}, this.state.stock, stock)});
   }
 
   handleActionSelect = (selected) => {
-    console.log('selected ' + selected)
     this.setState({stock: Object.assign({}, this.state.stock, {action: selected})})
   }
 
@@ -117,16 +113,20 @@ class StockForm extends Component {
             <li className='field'>
               <InlineSelect
                 label='Exchange'
-                options={Object.keys(exchanges).map((e) =>
-                ({text: exchanges[e],
-                  value: exchanges[e]}))}
+                options={
+                  Object.keys(exchanges).map((e) =>({
+                    text: exchanges[e],
+                    value: exchanges[e]
+                  }))
+                }
                   selected={stock.exchange}
                   onSelect={this.handleExchangeSelect}
                 />
             </li>
             <li className='field'>
               <div className='input-field'>
-                <input id='symbol'
+                <input
+                 id='symbol'
                  type='text'
                  value={stock.symbol}
                  onChange={this.handleInputChange}
@@ -139,14 +139,15 @@ class StockForm extends Component {
             </li>
             <li className='field'>
               <div className='input-field'>
-                <input id='price'
-                 type='tel'
-                 value={stock.price}
-                 placeholder='Price'
-                 className='price'
-                 onChange={this.handleInputChange}
-                 pattern='^\d{0,8}(\.\d{1,4})?$'
-                 required='required'
+                <input
+                  id='price'
+                  type='tel'
+                  value={stock.price}
+                  placeholder='Price'
+                  className='price'
+                  onChange={this.handleInputChange}
+                  pattern='^\d{0,8}(\.\d{1,4})?$'
+                  required='required'
                 />
               </div>
             </li>
@@ -185,12 +186,12 @@ class StockForm extends Component {
               mode === 'edit' ? deleteElm : null
             }
             <button
-              className='secondary'
+              className="secondary"
               onClick={this.cancelForm}>Cancel
             </button>
             <button
-              className='primary'
-              type='submit'>
+              className="primary"
+              type="submit">
               {this.props.mode === 'edit' ? 'Save' : 'Add'}
             </button>
           </div>

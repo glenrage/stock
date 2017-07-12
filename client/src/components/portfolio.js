@@ -9,9 +9,9 @@ import '../css/portfolio.css';
 class EmptyPortfolio extends Component {
   render() {
     return (
-      <div className='empty-portfolio'>
-          <p className='intro'> Portfolio Tracker </p>
-          <div className='instruction'>
+      <div className="empty-portfolio">
+          <p className="intro"> Portfolio Tracker </p>
+          <div className="instruction">
           <p> Start with </p>
           <button onClick={this.props.onSamplePortfolio}> Sample Portfolio</button>
           <p> or, add stocks and customize your own portfolio. </p>
@@ -35,8 +35,8 @@ class StockPortfolio extends Component {
 
     return (
 
-      <div className='stock-portfolio'>
-        <div className='netWorth'>
+      <div className="stock-portfolio">
+        <div className="netWorth">
           <NetWorthMeter netWorth={netWorth} stocks={this.props.stocks}/>
         </div>
         {
@@ -58,7 +58,7 @@ class Portfolio extends Component {
     }
 
     return (
-      <div className='portfolio'>
+      <div className="portfolio">
         {elm}
       </div>
     )

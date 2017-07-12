@@ -12,6 +12,7 @@ class StockSummary extends Component {
   render() {
     let data = this.props.data;
     let {stock} = data;
+
     return (
       <div className="stock-summary">
         <div className="symbol column">
@@ -75,13 +76,12 @@ class StockDetail extends Component {
 }
 
 class Stock extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       deleted: false
-    }
+    };
   }
 
   daysOld(date) {
@@ -152,7 +152,6 @@ class Stock extends Component {
           this.props.stockMode === stock_mode.detail ? <StockDetail data={data}/> :
           <StockSummary data={data}/>
         }
-
       </div>
     )
   }

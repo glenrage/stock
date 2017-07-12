@@ -1,6 +1,6 @@
 .stock-summary {
     display: flex;
-    color: #4d4d4d;
+    color: #9a9a9a;
 }
 
 .stock-summary .column {
@@ -18,6 +18,7 @@
 
 .stock-summary .symbol {
     font-size: 1rem;
+    color: #9a9a9a;
 }
 
 .stock-summary .quantity {
@@ -30,7 +31,7 @@
 .stock-summary .price .current {
     color: #D4AF37;
     font-size: 1rem;
-    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 .stock-summary .profit .current {

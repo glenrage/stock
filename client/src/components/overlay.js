@@ -26,8 +26,11 @@ class Overlay extends Component {
   render() {
 
     let isOpen = this.props.open;
-
-    let overlayClasses = classnames({overlay: true, open: isOpen, closing: this.state.closing});
+    let overlayClasses = classnames({
+      overlay: true,
+      open: isOpen,
+      closing: this.state.closing
+    });
 
     let contentsClass = classnames({
       contents: true,
@@ -39,10 +42,10 @@ class Overlay extends Component {
     return (
       <div className={overlayClasses}>
         <div className={contentsClass}>
-          <div className='wrapper'>
+          <div className="wrapper">
             <header>
-              <h2 className='title'>{this.props.title}</h2>
-              <button className='close-overlay' onClick={this.close}>close overlay</button>
+              <h2 className="title">{this.props.title}</h2>
+              <button className="close-overlay" onClick={this.close}>Close</button>
             </header>
             {this.props.children}
           </div>

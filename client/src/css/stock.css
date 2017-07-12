@@ -1,7 +1,7 @@
 .stock {
     position: relative;
-    background-color: #ffffff;
-    padding: 10px 0;
+    background-color: #4d4d4d;
+    padding: 20px 0 0 0;
 }
 
 .stock: first-child {
@@ -18,8 +18,9 @@
 }
 
 .details .symbol {
-    font-size: .8rem;
+    font-size: 1.2rem;
     font-weight: bold;
+    color: orange;
 }
 
 .details .market {
@@ -28,7 +29,7 @@
 
 .market-price {
     font-size: 1.4rem;
-    font-weight: 300;
+    font-weight: bold;
     margin-top: 10px;
     color: red;
 }
@@ -84,19 +85,6 @@
 .volatile-value.down:after {
     content: '▼';
     color: #e74c3c;
-}
-
-
-.investment .cost {
-    font-size: 1.5rem;
-}
-
-.return .worth {
-    font-size: 1.5rem;
-}
-
-.return .current-value {
-    font-size: 1.5rem;
 }
 
 .actions {

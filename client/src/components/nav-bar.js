@@ -11,14 +11,14 @@ class NavBar extends Component {
 			toggleElm = (
 				<button onClick={this.props.onToggleStockMode}>
 					<span className="icon-compress" />
-					<i>Minimize Portfolio</i>
+					<i>Minimize</i>
 				</button>
 			);
 		} else {
 			toggleElm = (
 				<button onClick={this.props.onToggleStockMode}>
 					<span className="icon-expand" />
-					<i>Expand Portfolio</i>
+					<i>Expand</i>
 				</button>
 			);
 		}

@@ -67,7 +67,7 @@ class Gauge extends Component {
             });
             return <use className={tickClassNames} key={'tick-' + tick} href="#tick" transform={`rotate(${tick} ${centerX} ${centerY})`}/>
           })
-}
+        }
 
         </g>
 
