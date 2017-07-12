@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "eslint-plugin-import": "^2.7.0",
     "jquery": "^3.2.1",
     "react": "^15.5.4",
     "react-autosuggest": "^9.3.1",
