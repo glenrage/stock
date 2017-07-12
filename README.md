@@ -1,7 +1,3 @@
-"eslint-plugin-flowtype": "^2.35.0",
-"eslint-plugin-import": "^2.7.0",
-"eslint-plugin-jsx-a11y": "^6.0.2",
-"eslint-plugin-react": "^7.1.0",
 
 # Trance Trader
 
@@ -11,6 +7,8 @@ Trance Trader is a stock market portfolio app where users can build a portfolio 
 
 Click on sample portfolio to get a pre generated portfolio with stocks or create your own by clicking add stock.
 You can expand views in the nav bar up top. To add a stock click add and insert ticker symbol, add in a price bought at, quantity, as well as date purchased. The Portfolio Value will change based on gains or losses against real time market data.
+
+
 
 ### Installing
 
