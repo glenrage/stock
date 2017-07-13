@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AutoSuggest from 'react-autosuggest';
+// import AutoSuggest from 'react-autosuggest';
 import InlineSelect from './inline-select';
 import {actions, demo_stock, exchanges} from './data/constants'
 import '../css/stock-form.css';

@@ -7,4 +7,4 @@ import './css/index.css'
 
 
 ReactDOM.render(<TranceTrader />, document.getElementById('root'));
-// registerServiceWorker();
+registerServiceWorker();

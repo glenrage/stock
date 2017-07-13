@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import NetWorthMeter from './networth-meter';
 import Stock from './stock';
-import Helpers from '../helpers';
+// import Helpers from '../helpers';
 import '../css/portfolio.css';
 
 class EmptyPortfolio extends Component {

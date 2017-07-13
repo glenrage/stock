@@ -1,31 +1,23 @@
 {
-  "name": "Trance-Trader",
-  "version": "1.0.0",
-  "description": "",
-  "engines": {
-    "node": "6.11.x"
+  "name": "Trance Trader",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "jquery": "^3.2.1",
+    "react": "^15.4.2",
+    "react-autosuggest": "^9.3.1",
+    "react-dom": "^15.4.2",
+    "react-router-dom": "^4.1.1"
   },
   "scripts": {
-    "start": "node server",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev  && npm run build"
-  },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-  ],
-  "dependencies": {
-    "express": "^4.14.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/glenrage-trance-trader.git"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "create-react-app",
-    "react"
-  ],
-  "license": "MIT",
-  "devDependencies": {}
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+
 }
