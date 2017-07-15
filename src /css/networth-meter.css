@@ -1,0 +1,29 @@
+.networth-meter svg {
+}
+
+.networth-meter .networth-label {
+    fill: #cacaca;
+    font-size: .6rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: .4rem;
+}
+.networth-meter .networth-current {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.7rem;
+    fill: #D4AF37;
+    letter-spacing: .1rem;
+}
+
+.networth-meter .networth-change {
+    font-size: .91rem;
+    letter-spacing: .1rem;
+}
+
+.networth-meter .networth-change.up {
+    fill: #27ae60;
+}
+
+.networth-meter .networth-change.down {
+    fill: #e74c3c;
+}

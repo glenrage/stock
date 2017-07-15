@@ -1,0 +1,58 @@
+.netWorth {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.netWorth-info {
+    background-color: #fafafa;
+    padding: 20px 0;
+}
+
+.netWorth-info .current {
+    font-size: 2rem;
+}
+
+.netWorth-info .netWorth-change {
+    font-size: .8rem;
+    margin-top: 5px;
+}
+
+.empty-portfolio {
+    text-align: center;
+    padding-top: 100px;
+    color: #fafafa;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.intro {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #cacaca;
+}
+
+.instruction {
+    margin-top: 50px;
+}
+
+.instruction p {
+    margin: 20px 0;
+    font-size: 1.2rem;
+    color: #cacaca;
+    font-weight: 300;
+}
+
+.instruction button {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300;
+    background-color: #212121;
+    color: #D4AF37;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: .9rem;
+    letter-spacing: 1pt;
+    box-shadow: 0 0 5px #000;
+    cursor: pointer;
+}

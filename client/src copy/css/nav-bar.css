@@ -1,0 +1,53 @@
+.nav-bar {
+    padding: 10px 10px 0 10px;
+    display: flex;
+}
+
+.nav-bar .column {
+    flex: 1;
+    align-self: center;
+}
+
+.nav-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2pt;
+}
+
+.nav-title a {
+    text-decoration: none;
+    color: #D4AF37;
+}
+
+.portfolio-actions {
+    text-align: right;
+    padding: 5px;
+}
+
+.portfolio-actions li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.portfolio-actions li:last-child {
+    margin-right: 0;
+}
+
+.portfolio-actions button {
+    border: none;
+    background-color: transparent;
+    color: #D4AF37;
+}
+
+.portfolio-actions [class^="icon-"],
+.portfolio-actions [class*=" icon-"] {
+    display: block;
+    font-size: 1.5em;
+}
+
+.portfolio-actions i {
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+}
