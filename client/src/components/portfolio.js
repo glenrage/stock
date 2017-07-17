@@ -37,7 +37,10 @@ class StockPortfolio extends Component {
 
       <div className="stock-portfolio">
         <div className="netWorth">
-          <NetWorthMeter netWorth={netWorth} stocks={this.props.stocks}/>
+          <NetWorthMeter
+            netWorth={netWorth}
+            stocks={this.props.stocks}
+          />
         </div>
         {
           this.props.stocks.map((stock) => <Stock key={stock.id} stock={stock} {...this.props} />)

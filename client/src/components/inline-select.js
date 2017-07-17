@@ -11,7 +11,6 @@ class InlineSelect extends Component {
           <ul>
           {
             this.props.options.map((o, idx) => {
-              console.log('options' + o.value)
               let optionClassNames = classnames({
                 option: true,
                 selected: o.value === this.props.selected
