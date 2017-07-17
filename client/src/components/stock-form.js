@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AutoSuggest from 'react-autosuggest';
+// import AutoSuggest from 'react-autosuggest';
 import InlineSelect from './inline-select';
 import {actions, demo_stock, exchanges} from './data/constants'
 import '../css/stock-form.css';
@@ -78,27 +78,27 @@ class StockForm extends Component {
   render() {
     let stock = this.state.stock;
     let symbolProps = {
-      id: 'symbol',
-      type: 'text',
+      id: "symbol",
+      type: "text",
       value: stock.symbol,
       onChange: this.handleInputChange,
-      placeholder: 'Symbol',
-      className: 'symbol',
-      required: 'required'
+      placeholder: "Symbol",
+      className: "symbol",
+      required: "required"
     };
     let mode = this.props.mode;
     let deleteElm = (
-      <button className='alternate' onClick={this.deleteStock}><span className='icon-trash-o'/>
+      <button className="alternate" onClick={this.deleteStock}><span className="icon-trash-o" />
         Delete
       </button>
     )
     return (
-      <div className='stock-form'>
+      <div className="stock-form">
         <form onSubmit={this.saveForm}>
-          <ul className='fields'>
-            <li className='field'>
+          <ul className="fields">
+            <li className="field">
               <InlineSelect
-                label='Action'
+                label="Action"
                 options={[
                 {
                   text: actions.buy,
@@ -110,9 +110,9 @@ class StockForm extends Component {
                 selected={stock.action}
                 onSelect={this.handleActionSelect.bind(this)}/>
             </li>
-            <li className='field'>
+            <li className="field">
               <InlineSelect
-                label='Exchange'
+                label="Exchange"
                 options={
                   Object.keys(exchanges).map((e) =>({
                     text: exchanges[e],
@@ -123,65 +123,65 @@ class StockForm extends Component {
                   onSelect={this.handleExchangeSelect}
                 />
             </li>
-            <li className='field'>
-              <div className='input-field'>
+            <li className="field">
+              <div className="input-field">
                 <input
-                 id='symbol'
-                 type='text'
+                 id="symbol"
+                 type="text"
                  value={stock.symbol}
                  onChange={this.handleInputChange}
-                 placeholder='Symbol'
-                 className='symbol'
-                 pattern='[a-zA-Z]+'
-                 required='required'
-                />
-              </div>
-            </li>
-            <li className='field'>
-              <div className='input-field'>
-                <input
-                  id='price'
-                  type='tel'
-                  value={stock.price}
-                  placeholder='Price'
-                  className='price'
-                  onChange={this.handleInputChange}
-                  pattern='^\d{0,8}(\.\d{1,4})?$'
-                  required='required'
+                 placeholder="Symbol"
+                 className="symbol"
+                 pattern="[a-zA-Z]+"
+                 required="required"
                 />
               </div>
             </li>
             <li className="field">
-              <div className='input-field'>
+              <div className="input-field">
                 <input
-                  id='quantity'
-                  type='tel'
-                  value={stock.quantity}
-                  placeholder='Quantity'
-                  className='quantity'
+                  id="price"
+                  type="tel"
+                  value={stock.price}
+                  placeholder="Price"
+                  className="price"
                   onChange={this.handleInputChange}
-                  pattern='^\d{0,8}$'
-                  required='required'
+                  pattern="^\d{0,8}(\.\d{1,4})?$"
+                  required="required"
                 />
               </div>
             </li>
-            <li className='field'>
-              <div className='input-field stock-date'>
+            <li className="field">
+              <div className="input-field">
                 <input
-                  id='date'
-                  type='text'
-                  value={stock.date}
-                  placeholder='DD/MM/YYYY'
-                  className='date'
+                  id="quantity"
+                  type="tel"
+                  value={stock.quantity}
                   onChange={this.handleInputChange}
-                  pattern='\d{1,2}/\d{1,2}/\d{4}'
-                  required='required'
+                  placeholder="Quantity"
+                  className="quantity"
+                  pattern="^\d{0,8}$"
+                  required="required"
                 />
-                <span className='icon-calender-plus-o today' onClick={this.injectDate}/>
+              </div>
+            </li>
+            <li className="field">
+              <div className="input-field stock-date">
+                <input
+                  id="date"
+                  type="text"
+                  value={stock.date}
+                  placeholder="DD/MM/YYYY"
+                  className="date"
+                  onChange={this.handleInputChange}
+                  pattern="\d{1,2}/\d{1,2}/\d{4}"
+                  required="required"
+                />
+                <span className="icon-calender-plus-o today" onClick={this.injectDate}/>
               </div>
             </li>
           </ul>
-          <div className='cta-buttons'>
+          <div className="cta-buttons">
             {
               mode === 'edit' ? deleteElm : null
             }
@@ -192,7 +192,7 @@ class StockForm extends Component {
             <button
               className="primary"
               type="submit">
-              {this.props.mode === 'edit' ? 'Save' : 'Add'}
+              {mode === 'edit' ? 'Save' : 'Add'}
             </button>
           </div>
         </form>

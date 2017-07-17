@@ -36,7 +36,7 @@ class StockDetail extends Component {
 
   getStockName = () => {
     let symbol = this.props.data.stock.symbol;
-    return (stock_codes.find((tickers) => tickers.code === symbol)).description;
+    return (stock_codes.find((tickers) => tickers.code === symbol)).description.split('(')[0];
   }
 
   render() {
@@ -85,11 +85,11 @@ class Stock extends Component {
   }
 
   daysOld(date) {
-    let single = 24 * 60 * 60 * 1000
+    let singleDay = 24 * 60 * 60 * 1000
     let parts = date.split('/');
-    let first = new Date(parts[2], parts[1], parts[0]);
-    let second = new Date()
-    return Math.round(Math.abs((first.getTime() - second.getTime()) / (single)));
+    let firstDate = new Date(parts[2], parts[1], parts[0]);
+    let secondDate = new Date()
+    return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (singleDay)));
   }
 
   deleteStock = (e) => {

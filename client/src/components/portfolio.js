@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import NetWorthMeter from './networth-meter';
 import Stock from './stock';
-import Helpers from '../helpers';
+// import Helpers from '../helpers';
 import '../css/portfolio.css';
 
 class EmptyPortfolio extends Component {
@@ -37,7 +37,10 @@ class StockPortfolio extends Component {
 
       <div className="stock-portfolio">
         <div className="netWorth">
-          <NetWorthMeter netWorth={netWorth} stocks={this.props.stocks}/>
+          <NetWorthMeter
+            netWorth={netWorth}
+            stocks={this.props.stocks}
+          />
         </div>
         {
           this.props.stocks.map((stock) => <Stock key={stock.id} stock={stock} {...this.props} />)

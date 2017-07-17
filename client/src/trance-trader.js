@@ -10,7 +10,7 @@ import './css/trance-trader.css';
 
 const LOCAL_KEY = 'appState'
 const GOOG = 'https://finance.google.com/finance/info?q=';
-const prefix = '//'
+// const prefix = '//'
 
 class TranceTrader extends Component {
 
@@ -177,15 +177,15 @@ class TranceTrader extends Component {
 
   guid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+
+            var r = Math.random() * 16 || 0, v = c === 'x' ? r : (r & 0x3 || 0x8);
             return v.toString(16);
         });
     }
 
   render() {
     return (
-      <Router basename='/trader'>
+      <Router basename='/'>
         <div className='app'>
 
           <NavBar
