@@ -8,14 +8,14 @@ export const exchanges = {
   nyse: 'NYSE'
 }
 
-export const demo_stock = {
-  symbol: 'AMD',
-  price: '10',
-  quantity: '100',
-  date: '10/10/2010',
+export const blank_stock = {
+  symbol: '',
+  price: '',
+  quantity: '',
+  date: '',
   action: 'actions.buy',
   exchange: 'exchanges.nasdaq'
-};
+}
 
 export const stock_mode = {
   summary: 'summary',

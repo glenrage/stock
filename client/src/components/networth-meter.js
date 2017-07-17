@@ -71,7 +71,7 @@ class NetWorthMeter extends Component {
                 fill={`#${colors.styleOne[idx]}`}
 								d={`M${centerX},${centerY} l${centerX},0 A${centerX},${centerY} 0 0,0 ${p.x},${p.y} z`}
 							>
-                <animateTransform
+              <animateTransform
 								attributeName="transform"
 								type="rotate"
 								from={`0 ${centerX} ${centerY}`}

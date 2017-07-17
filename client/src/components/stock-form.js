@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import AutoSuggest from 'react-autosuggest';
 import InlineSelect from './inline-select';
-import {actions, demo_stock, exchanges} from './data/constants'
+import {actions, blank_stock, exchanges} from './data/constants'
 import '../css/stock-form.css';
 
 class StockForm extends Component {
@@ -11,7 +11,7 @@ class StockForm extends Component {
 
     this.state = {
       closing: false,
-      stock: Object.assign({}, demo_stock, props.stock)
+      stock: Object.assign({}, blank_stock, props.stock)
     }
   }
 
@@ -32,7 +32,7 @@ class StockForm extends Component {
   };
 
   clearForm = () => {
-    this.setState({stock: demo_stock})
+    this.setState({stock: blank_stock})
   };
 
   deleteStock = (e) => {

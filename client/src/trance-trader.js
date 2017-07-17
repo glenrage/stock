@@ -5,12 +5,12 @@ import Portfolio from './components/portfolio';
 import StockForm from './components/stock-form';
 import NavBar from './components/nav-bar';
 import Overlay from './components/overlay';
-import {demo_stock, stock_mode} from './components/data/constants';
+import {stock_mode, blank_stock} from './components/data/constants';
+import sample_stocks from './components/data/sample_stocks'
 import './css/trance-trader.css';
 
 const LOCAL_KEY = 'appState'
 const GOOG = 'https://finance.google.com/finance/info?q=';
-// const prefix = '//'
 
 class TranceTrader extends Component {
 
@@ -23,7 +23,7 @@ class TranceTrader extends Component {
     }, this.syncFromStorage(), {
       formMode: '',
       showForm: false,
-      stockToEdit: demo_stock,
+      stockToEdit: blank_stock,
     })
   }
 
@@ -48,7 +48,7 @@ class TranceTrader extends Component {
       }
       this.setState({
         stocks: stocks,
-        stockToEdit: demo_stock
+        stockToEdit: blank_stock
       }, () => {
         this.syncToStorage(this.state);
         this.retrieveMarketData();
@@ -80,7 +80,7 @@ class TranceTrader extends Component {
   closeStockForm = () => {
     this.setState({
       showForm: false,
-      stockToEdit: demo_stock,
+      stockToEdit: blank_stock,
       formMode: ''
     });
   }
@@ -106,6 +106,12 @@ class TranceTrader extends Component {
       stockMode: mode
     }, () => {
       this.syncToStorage(this.state);
+    });
+  }
+
+  samplePortfolio = () => {
+    sample_stocks.forEach((stock) => {
+      this.saveTransaction(stock);
     });
   }
 
@@ -203,6 +209,7 @@ class TranceTrader extends Component {
                 onEditStock={this.editStockForm}
                 onDeleteStock={this.deleteStock}
                 onToggleStockMode={this.toggleStockMode}
+                onSamplePortfolio={this.samplePortfolio}
               />} />
           </div>
           <Overlay
