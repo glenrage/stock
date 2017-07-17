@@ -14,13 +14,15 @@ class EmptyPortfolio extends Component {
           <div className="instruction">
           <p> Start with </p>
           <button onClick={this.props.onSamplePortfolio}> Sample Portfolio</button>
-          <p> or, add stocks and customize your own portfolio. </p>
-        <button onClick={this.props.onAddStock}> Add stock</button>
+
         </div>
       </div>
     )
   }
 }
+
+// <p> or, add stocks and customize your own portfolio. </p>
+// <button onClick={this.props.onAddStock}> Add stock</button>
 
 class StockPortfolio extends Component {
 
