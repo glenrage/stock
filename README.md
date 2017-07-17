@@ -1,3 +1,4 @@
+
 # Trance Trader
 
 Trance Trader is a stock market portfolio app where users can build a portfolio of their own stocks. They can simulate stock market trades and view their portfolio value.
@@ -8,6 +9,8 @@ https://trader-deploy.herokuapp.com/
 
 Click on sample portfolio to get a pre generated portfolio with stocks or create your own by clicking add stock.
 You can expand views in the nav bar up top. To add a stock click add and insert ticker symbol, add in a price bought at, quantity, as well as date purchased. The Portfolio Value will change based on gains or losses against real time market data.
+
+
 
 ### Installing
 

@@ -5,6 +5,5 @@ import registerServiceWorker from './registerServiceWorker';
 import './css/fonts.css'
 import './css/index.css'
 
-
 ReactDOM.render(<TranceTrader />, document.getElementById('root'));
 registerServiceWorker();

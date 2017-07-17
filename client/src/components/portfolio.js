@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import NetWorthMeter from './networth-meter';
 import Stock from './stock';
-import Helpers from '../helpers';
+// import Helpers from '../helpers';
 import '../css/portfolio.css';
 
 class EmptyPortfolio extends Component {
@@ -14,13 +14,15 @@ class EmptyPortfolio extends Component {
           <div className="instruction">
           <p> Start with </p>
           <button onClick={this.props.onSamplePortfolio}> Sample Portfolio</button>
-          <p> or, add stocks and customize your own portfolio. </p>
-        <button onClick={this.props.onAddStock}> Add stock</button>
+
         </div>
       </div>
     )
   }
 }
+
+// <p> or, add stocks and customize your own portfolio. </p>
+// <button onClick={this.props.onAddStock}> Add stock</button>
 
 class StockPortfolio extends Component {
 
@@ -37,7 +39,10 @@ class StockPortfolio extends Component {
 
       <div className="stock-portfolio">
         <div className="netWorth">
-          <NetWorthMeter netWorth={netWorth} stocks={this.props.stocks}/>
+          <NetWorthMeter
+            netWorth={netWorth}
+            stocks={this.props.stocks}
+          />
         </div>
         {
           this.props.stocks.map((stock) => <Stock key={stock.id} stock={stock} {...this.props} />)
