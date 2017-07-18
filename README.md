@@ -10,8 +10,6 @@ https://trader-deploy.herokuapp.com/
 Click on sample portfolio to get a pre generated portfolio with stocks or create your own by clicking add stock.
 You can expand views in the nav bar up top. To add a stock click add and insert ticker symbol, add in a price bought at, quantity, as well as date purchased. The Portfolio Value will change based on gains or losses against real time market data.
 
-
-
 ### Installing
 
 Git clone the project.
@@ -40,31 +38,10 @@ npm run
 ## Built With
 
 * [REACT]
-* [EXPRESS]
-* [NODE]
-* [MONGODB]
 * [CREATE - REACT - APP]
-
-## Contributing
-
-
 
 ## Todos
 * [ ] Refactor API to retrieve data from multiple markets
 * [ ] Store portfolio data for persistance
 * [ ] Passport login for social media
-
-
-
-
-## Authors
-
-* **Glen Pham** - [glenrage](http://www.glenrage.com)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
+* [ ] Redesign UI for Mobile
