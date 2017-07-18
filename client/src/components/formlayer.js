@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import classnames from "classnames";
-import "../css/overlay.css";
+import "../css/formlayer.css";
 
-class Overlay extends Component {
+class FormLayer extends Component {
 
   constructor(props) {
     super(props);
@@ -26,8 +26,8 @@ class Overlay extends Component {
   render() {
 
     let isOpen = this.props.open;
-    let overlayClasses = classnames({
-      overlay: true,
+    let formlayerClasses = classnames({
+      formlayer: true,
       open: isOpen,
       closing: this.state.closing
     });
@@ -40,12 +40,12 @@ class Overlay extends Component {
     });
 
     return (
-      <div className={overlayClasses}>
+      <div className={formlayerClasses}>
         <div className={contentsClass}>
           <div className="wrapper">
             <header>
               <h2 className="title">{this.props.title}</h2>
-              <button className="close-overlay" onClick={this.close}>Close</button>
+              <button className="close-formlayer" onClick={this.close}>Close</button>
             </header>
             {this.props.children}
           </div>
@@ -55,4 +55,4 @@ class Overlay extends Component {
   }
 }
 
-export default Overlay;
+export default FormLayer;

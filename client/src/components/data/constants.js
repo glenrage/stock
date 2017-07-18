@@ -8,7 +8,7 @@ export const exchanges = {
   nyse: 'NYSE'
 }
 
-export const blank_stock = {
+export const blank_ticker = {
   symbol: '',
   price: '',
   quantity: '',
@@ -17,7 +17,11 @@ export const blank_stock = {
   exchange: 'exchanges.nasdaq'
 }
 
-export const stock_mode = {
+export const ticker_mode = {
   summary: 'summary',
   detail: 'detail'
 }
+
+export const LOCAL_KEY = 'appState'
+
+export const GOOG = 'https://finance.google.com/finance/info?q=';

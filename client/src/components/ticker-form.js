@@ -1,27 +1,27 @@
 import React, {Component} from 'react';
 // import AutoSuggest from 'react-autosuggest';
 import InlineSelect from './inline-select';
-import {actions, blank_stock, exchanges} from './data/constants'
-import '../css/stock-form.css';
+import {actions, blank_ticker, exchanges} from './data/constants'
+import '../css/ticker-form.css';
 
-class StockForm extends Component {
+class TickerForm extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
       closing: false,
-      stock: Object.assign({}, blank_stock, props.stock)
+      ticker: Object.assign({}, blank_ticker, props.ticker)
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({stock: Object.assign({}, nextProps.stock)})
+    this.setState({ticker: Object.assign({}, nextProps.ticker)})
   }
 
   saveForm = (w) => {
     w.preventDefault()
-    let trans = Object.assign({}, this.state.stock);
+    let trans = Object.assign({}, this.state.ticker);
     this.clearForm();
     this.props.onSave(trans)
   }
@@ -32,12 +32,12 @@ class StockForm extends Component {
   };
 
   clearForm = () => {
-    this.setState({stock: blank_stock})
+    this.setState({ticker: blank_ticker})
   };
 
-  deleteStock = (e) => {
+  deleteTicker = (e) => {
     e.preventDefault();
-    this.props.onDelete(this.props.stock.id);
+    this.props.onDelete(this.props.ticker.id);
   };
 
   getDateFunc = () => {
@@ -56,44 +56,35 @@ class StockForm extends Component {
   };
 
   injectDate = () => {
-    let stock = this.state.stock;
-    stock.date = this.getDateFunc();
-    this.setState = ({stock});
+    let ticker = this.state.ticker;
+    ticker.date = this.getDateFunc();
+    this.setState = ({ticker});
   };
 
   handleInputChange = (e) => {
-    let stock = {};
-    stock[e.target.id] = e.target.value;
-    this.setState({stock: Object.assign({}, this.state.stock, stock)});
+    let ticker = {};
+    ticker[e.target.id] = e.target.value;
+    this.setState({ticker: Object.assign({}, this.state.ticker, ticker)});
   }
 
   handleActionSelect = (selected) => {
-    this.setState({stock: Object.assign({}, this.state.stock, {action: selected})})
+    this.setState({ticker: Object.assign({}, this.state.ticker, {action: selected})})
   }
 
   handleExchangeSelect = (selected) => {
-    this.setState({stock: Object.assign({}, this.state.stock, {exchange: selected})})
+    this.setState({ticker: Object.assign({}, this.state.ticker, {exchange: selected})})
   }
 
   render() {
-    let stock = this.state.stock;
-    let symbolProps = {
-      id: "symbol",
-      type: "text",
-      value: stock.symbol,
-      onChange: this.handleInputChange,
-      placeholder: "Symbol",
-      className: "symbol",
-      required: "required"
-    };
+    let ticker = this.state.ticker;
     let mode = this.props.mode;
     let deleteElm = (
-      <button className="alternate" onClick={this.deleteStock}><span className="icon-trash-o" />
+      <button className="alternate" onClick={this.deleteTicker}><span className="icon-trash-o" />
         Delete
       </button>
     )
     return (
-      <div className="stock-form">
+      <div className="ticker-form">
         <form onSubmit={this.saveForm}>
           <ul className="fields">
             <li className="field">
@@ -107,7 +98,7 @@ class StockForm extends Component {
                   text: actions.sell,
                   value: actions.sell
                 }]}
-                selected={stock.action}
+                selected={ticker.action}
                 onSelect={this.handleActionSelect.bind(this)}/>
             </li>
             <li className="field">
@@ -119,7 +110,7 @@ class StockForm extends Component {
                     value: exchanges[e]
                   }))
                 }
-                  selected={stock.exchange}
+                  selected={ticker.exchange}
                   onSelect={this.handleExchangeSelect}
                 />
             </li>
@@ -128,7 +119,7 @@ class StockForm extends Component {
                 <input
                  id="symbol"
                  type="text"
-                 value={stock.symbol}
+                 value={ticker.symbol}
                  onChange={this.handleInputChange}
                  placeholder="Symbol"
                  className="symbol"
@@ -142,7 +133,7 @@ class StockForm extends Component {
                 <input
                   id="price"
                   type="tel"
-                  value={stock.price}
+                  value={ticker.price}
                   placeholder="Price"
                   className="price"
                   onChange={this.handleInputChange}
@@ -156,7 +147,7 @@ class StockForm extends Component {
                 <input
                   id="quantity"
                   type="tel"
-                  value={stock.quantity}
+                  value={ticker.quantity}
                   onChange={this.handleInputChange}
                   placeholder="Quantity"
                   className="quantity"
@@ -166,11 +157,11 @@ class StockForm extends Component {
               </div>
             </li>
             <li className="field">
-              <div className="input-field stock-date">
+              <div className="input-field ticker-date">
                 <input
                   id="date"
                   type="text"
-                  value={stock.date}
+                  value={ticker.date}
                   placeholder="DD/MM/YYYY"
                   className="date"
                   onChange={this.handleInputChange}
@@ -201,4 +192,4 @@ class StockForm extends Component {
   }
 }
 
-export default StockForm;
+export default TickerForm;

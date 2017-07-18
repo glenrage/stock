@@ -2,15 +2,12 @@ import $ from 'jquery'
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Portfolio from './components/portfolio';
-import StockForm from './components/stock-form';
+import TickerForm from './components/ticker-form';
 import NavBar from './components/nav-bar';
-import Overlay from './components/overlay';
-import {stock_mode, blank_stock} from './components/data/constants';
-import sample_stocks from './components/data/sample_stocks'
+import FormLayer from './components/formlayer';
+import {ticker_mode, blank_ticker, GOOG, LOCAL_KEY}  from './components/data/constants';
+import sample_tickers from './components/data/sample_tickers'
 import './css/trance-trader.css';
-
-const LOCAL_KEY = 'appState'
-const GOOG = 'https://finance.google.com/finance/info?q=';
 
 class TranceTrader extends Component {
 
@@ -18,12 +15,12 @@ class TranceTrader extends Component {
     super(props)
 
     this.state = Object.assign({
-      stocks: [],
-      stockMode: stock_mode.detail
+      tickers: [],
+      tickerMode: ticker_mode.detail
     }, this.syncFromStorage(), {
       formMode: '',
       showForm: false,
-      stockToEdit: blank_stock,
+      tickerToEdit: blank_ticker,
     })
   }
 
@@ -32,23 +29,22 @@ class TranceTrader extends Component {
   }
 
   saveTransaction = (trans) => {
-    let stocks = this.state.stocks;
+    let tickers = this.state.tickers;
     if(this.isValidTransaction(trans)) {
-      this.closeStockForm()
+      this.closeTickerForm()
       if(!trans.id) {
-        trans.id = this.guid();
-        stocks.push(trans)
+        tickers.push(trans)
       } else {
-        stocks = stocks.map((stock) => {
-          if (stock.id === trans.id) {
+        tickers = tickers.map((ticker) => {
+          if (ticker.id === trans.id) {
             return trans;
           }
-          return stock;
+          return ticker;
         });
       }
       this.setState({
-        stocks: stocks,
-        stockToEdit: blank_stock
+        tickers: tickers,
+        tickerToEdit: blank_ticker
       }, () => {
         this.syncToStorage(this.state);
         this.retrieveMarketData();
@@ -56,62 +52,62 @@ class TranceTrader extends Component {
     }
   }
 
-  toggleStockForm = (e) => {
+  toggleTickerForm = (e) => {
     e.preventDefault();
     this.setState({
       showForm: !this.state.showForm
     });
   }
 
-  addStockForm = (e) => {
+  addTickerForm = (e) => {
     this.setState({
       showForm: true
     });
   }
 
-  editStockForm = (stock) => {
+  editTickerForm = (ticker) => {
     this.setState({
       showForm: true,
       formMode: 'edit',
-      stockToEdit: stock
+      tickerToEdit: ticker
     })
   }
 
-  closeStockForm = () => {
+  closeTickerForm = () => {
     this.setState({
       showForm: false,
-      stockToEdit: blank_stock,
+      tickerToEdit: blank_ticker,
       formMode: ''
     });
   }
 
-  deleteStock = (id) => {
-    let stocks = this.state.stocks.filter((t) => t.id !== id);
+  deleteTicker = (id) => {
+    let tickers = this.state.tickers.filter((t) => t.id !== id);
     this.setState({
-      stocks: stocks
+      tickers: tickers
     }, () => {
-      this.closeStockForm();
+      this.closeTickerForm();
       this.syncToStorage(this.state);
     });
   }
 
-  toggleStockMode = () => {
-    let mode = this.state.stockMode;
-    if (mode === stock_mode.summary) {
-      mode = stock_mode.detail;
+  toggleTickerMode = () => {
+    let mode = this.state.tickerMode;
+    if (mode === ticker_mode.summary) {
+      mode = ticker_mode.detail;
     } else {
-      mode = stock_mode.summary
+      mode = ticker_mode.summary
     }
     this.setState({
-      stockMode: mode
+      tickerMode: mode
     }, () => {
       this.syncToStorage(this.state);
     });
   }
 
   samplePortfolio = () => {
-    sample_stocks.forEach((stock) => {
-      this.saveTransaction(stock);
+    sample_tickers.forEach((ticker) => {
+      this.saveTransaction(ticker);
     });
   }
 
@@ -136,10 +132,10 @@ class TranceTrader extends Component {
   }
 
   retrieveMarketData = () => {
-    let stocks = this.state.stocks;
-    if (stocks.length > 0) {
+    let tickers = this.state.tickers;
+    if (tickers.length > 0) {
 
-      let url = GOOG + stocks.map((s) => `${s.symbol.toUpperCase()}`).join(',');
+      let url = GOOG + tickers.map((s) => `${s.symbol.toUpperCase()}`).join(',');
       $.ajax({
           url: url,
           jsonp: 'callback',
@@ -159,7 +155,7 @@ class TranceTrader extends Component {
         note[s.t] = s;
         return note;
       }, {});
-      let stocks = this.state.stocks.map((s) => {
+      let tickers = this.state.tickers.map((s) => {
         let symbol = symbols[s.symbol]
         if(symbol) {
           s['currentPrice'] = symbol.l;
@@ -171,7 +167,7 @@ class TranceTrader extends Component {
         }
       });
       this.setState({
-        stocks: stocks
+        tickers: tickers
       });
       this.syncToStorage(this.state);
     }
@@ -181,50 +177,42 @@ class TranceTrader extends Component {
     this.retrieveMarketData();
   }
 
-  guid() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-
-            var r = Math.random() * 16 || 0, v = c === 'x' ? r : (r & 0x3 || 0x8);
-            return v.toString(16);
-        });
-    }
-
   render() {
     return (
       <Router basename='/'>
         <div className='app'>
 
           <NavBar
-            stockMode={this.state.stockMode}
-            onAddStock={this.addStockForm}
-            onToggleStockMode={this.toggleStockMode}
+            tickerMode={this.state.tickerMode}
+            onAddTicker={this.addTickerForm}
+            onToggleTickerMode={this.toggleTickerMode}
             onReload={this.reload}
           />
           <div className='content'>
             <Route exact path='/'render={() =>
               <Portfolio
-                stocks={this.state.stocks}
-                stockMode={this.state.stockMode}
-                onAddStock={this.addStockForm}
-                onEditStock={this.editStockForm}
-                onDeleteStock={this.deleteStock}
-                onToggleStockMode={this.toggleStockMode}
+                tickers={this.state.tickers}
+                tickerMode={this.state.tickerMode}
+                onAddTicker={this.addTickerForm}
+                onEditTicker={this.editTickerForm}
+                onDeleteTicker={this.deleteTicker}
+                onToggleTickerMode={this.toggleTickerMode}
                 onSamplePortfolio={this.samplePortfolio}
               />} />
           </div>
-          <Overlay
-            title={this.state.formMode === 'edit' ? 'Edit Stock' : 'Add Stock'}
+          <FormLayer
+            title={this.state.formMode === 'edit' ? 'Edit Ticker' : 'Add Ticker'}
             open={this.state.showForm}
-            onClose={this.closeStockForm}
+            onClose={this.closeTickerForm}
             >
-            <StockForm
-              stock={this.state.stockToEdit}
+            <TickerForm
+              ticker={this.state.tickerToEdit}
               mode={this.state.formMode}
               onSave={this.saveTransaction}
-              onClose={this.closeStockForm}
-              onDelete={this.deleteStock}
+              onClose={this.closeTickerForm}
+              onDelete={this.deleteTicker}
             />
-          </Overlay>
+          </FormLayer>
         </div>
       </Router>
     )
