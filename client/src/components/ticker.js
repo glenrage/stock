@@ -2,26 +2,26 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import Gauge from './gauge';
 import Helpers from '../helpers';
-import {stock_mode} from './data/constants';
-import stock_codes from './data/stocks.js';
-import '../css/stock.css';
-import '../css/stock-summary.css';
-import '../css/stock-detail.css';
+import {ticker_mode} from './data/constants';
+import ticker_codes from './data/tickers.js';
+import '../css/ticker.css';
+import '../css/ticker-summary.css';
+import '../css/ticker-detail.css';
 
-class StockSummary extends Component {
+class TickerSummary extends Component {
   render() {
     let data = this.props.data;
-    let {stock} = data;
+    let {ticker} = data;
 
     return (
-      <div className="stock-summary">
+      <div className="ticker-summary">
         <div className="symbol column">
-          <p>{stock.symbol}</p>
-          <em className="quantity">{stock.quantity}</em>
+          <p>{ticker.symbol}</p>
+          <em className="quantity">{ticker.quantity}</em>
         </div>
         <div className="price column">
-          <p className="current">{Helpers.currency(stock.currentPrice)}</p>
-          <em className={data.priceChangeClassNames}>{stock.change}</em>
+          <p className="current">{Helpers.currency(ticker.currentPrice)}</p>
+          <em className={data.priceChangeClassNames}>{ticker.change}</em>
         </div>
         <div className="profit column">
           <p className="current">{Helpers.currency(data.value)}</p>
@@ -32,24 +32,24 @@ class StockSummary extends Component {
   }
 }
 
-class StockDetail extends Component {
+class TickerDetail extends Component {
 
-  getStockName = () => {
-    let symbol = this.props.data.stock.symbol;
-    return (stock_codes.find((tickers) => tickers.code === symbol)).description.split('(')[0];
+  getTickerName = () => {
+    let symbol = this.props.data.ticker.symbol;
+    return (ticker_codes.find((tickers) => tickers.code === symbol)).description.split('(')[0];
   }
 
   render() {
     let data = this.props.data;
-    let stock = data.stock;
+    let ticker = data.ticker;
 
     return (
-      <div className="stock-detail">
+      <div className="ticker-detail">
         <div className="columns">
           <div className="primary column">
-            <p className="symbol">{stock.symbol}</p>
-            <p className="current-price">{stock.currentPrice}</p>
-            <p className={data.priceChangeClassNames}>{stock.change}</p>
+            <p className="symbol">{ticker.symbol}</p>
+            <p className="current-price">{ticker.currentPrice}</p>
+            <p className={data.priceChangeClassNames}>{ticker.change}</p>
           </div>
           <div className="hero column">
             <Gauge className="profit-meter" value={data.profitPercent}/>
@@ -57,10 +57,10 @@ class StockDetail extends Component {
           <div className="secondary column">
             <p className="investment">
               <em>
-                <span className="icon-database"/> {stock.quantity}
+                <span className="icon-database"/> {ticker.quantity}
               </em>
               <em>
-                <span className="icon-money"/> {Helpers.currency(stock.price)}
+                <span className="icon-money"/> {Helpers.currency(ticker.price)}
               </em>
             </p>
             <p className="current-worth">{Helpers.currency(data.value)}</p>
@@ -68,14 +68,14 @@ class StockDetail extends Component {
           </div>
         </div>
         <div className="title">
-          <p>{this.getStockName()}</p>
+          <p>{this.getTickerName()}</p>
         </div>
       </div>
     )
   }
 }
 
-class Stock extends Component {
+class Ticker extends Component {
   constructor(props) {
     super(props);
 
@@ -92,34 +92,34 @@ class Stock extends Component {
     return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (singleDay)));
   }
 
-  deleteStock = (e) => {
+  deleteTicker = (e) => {
     e.stopPropagation();
     this.setState({
       deleted: true
     }, () => {
       setTimeout(() => {
-        this.props.onDeleteStock(this.props.stock.id);
+        this.props.onDeleteTicker(this.props.ticker.id);
       }, 600)
     });
   }
 
-  editStock = () => {
-    this.props.onEditStock(this.props.stock);
+  editTicker = () => {
+    this.props.onEditTicker(this.props.ticker);
   }
 
   render() {
-    let stock = this.props.stock;
-    let cost = stock.quantity * stock.price;
-    let value = stock.quantity * stock.currentPrice;
+    let ticker = this.props.ticker;
+    let cost = ticker.quantity * ticker.price;
+    let value = ticker.quantity * ticker.currentPrice;
     let profit = value - cost;
-    let daysOld = this.daysOld(stock.date);
+    let daysOld = this.daysOld(ticker.date);
     let profitPercent = Math.ceil((100 * profit) / cost);
 
     let priceChangeClassNames = classnames({
       'volatile-value': true,
       'price-change': true,
-      down: stock.changePercent < 0,
-      up: stock.changePercent >= 0
+      down: ticker.changePercent < 0,
+      up: ticker.changePercent >= 0
     });
 
     let profitChangeClassNames = classnames({
@@ -130,7 +130,7 @@ class Stock extends Component {
     });
 
     let data = {
-      stock,
+      ticker,
       cost,
       value,
       profit,
@@ -140,21 +140,21 @@ class Stock extends Component {
       priceChangeClassNames
     }
 
-    let stockClassNames = classnames({
-      stock: true,
+    let tickerClassNames = classnames({
+      ticker: true,
       animated: true,
       zoomOut: this.state.deleted
     });
 
     return (
-      <div className={stockClassNames} onClick={this.editStock}>
+      <div className={tickerClassNames} onClick={this.editTicker}>
         {
-          this.props.stockMode === stock_mode.detail ? <StockDetail data={data}/> :
-          <StockSummary data={data}/>
+          this.props.tickerMode === ticker_mode.detail ? <TickerDetail data={data}/> :
+          <TickerSummary data={data}/>
         }
       </div>
     )
   }
 }
 
-export default Stock;
+export default Ticker;

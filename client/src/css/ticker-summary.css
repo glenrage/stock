@@ -1,46 +1,46 @@
-.stock-summary {
+.ticker-summary {
     display: flex;
     color: #9a9a9a;
 }
 
-.stock-summary .column {
+.ticker-summary .column {
     flex: 1;
     text-align: left;
 }
 
-.stock-summary .column:first-child {
+.ticker-summary .column:first-child {
     padding-left: 20px;
 }
 
-.stock-summary .column:last-child {
+.ticker-summary .column:last-child {
     padding-right: 20px;
 }
 
-.stock-summary .symbol {
+.ticker-summary .symbol {
     font-size: 1rem;
     color: #9a9a9a;
 }
 
-.stock-summary .quantity {
+.ticker-summary .quantity {
     font-size: .9rem;
     color: #666666;
     margin-top: 10px;
     display: block;
 }
 
-.stock-summary .price .current {
+.ticker-summary .price .current {
     color: #D4AF37;
     font-size: 1rem;
     letter-spacing: 1px;
 }
 
-.stock-summary .profit .current {
+.ticker-summary .profit .current {
     font-size: 1rem;
     color: #D4AF37;
     letter-spacing: 1px;
 }
 
-.stock-summary .volatile-value {
+.ticker-summary .volatile-value {
     margin-top: 10px;
     font-size: .9rem;
     display: block;

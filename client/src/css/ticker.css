@@ -1,10 +1,10 @@
-.stock {
+.ticker {
     position: relative;
     background-color: #4d4d4d;
     padding: 20px 0 0 0;
 }
 
-.stock:first-child {
+.ticker:first-child {
     margin-top: 0
 }
 
