@@ -24,7 +24,7 @@ class NavBar extends Component {
 			<header className="nav-bar">
 				<h1 className="nav-title column" />
 				<ul className="portfolio-actions column">
-		
+
 					<li>
 						{toggleElm}
 					</li>
@@ -41,5 +41,3 @@ class NavBar extends Component {
 }
 
 export default NavBar;
-
-// <Logo onClick={this.props.onReload}/>
