@@ -15,8 +15,8 @@ let meter_size = 180;
 class NetWorthMeter extends Component {
 
   render() {
-    let {netWorth, stocks} = this.props;
-    let netWorthPortions = stocks.map(stock => stock.quantity * stock.currentPrice);
+    let {netWorth, tickers} = this.props;
+    let netWorthPortions = tickers.map(ticker => ticker.quantity * ticker.currentPrice);
     netWorthPortions.reverse();
     let netWorthPercents = netWorthPortions.map(wp => {
       let percent = parseFloat((meter_size * wp) / netWorth.current);
@@ -67,7 +67,7 @@ class NetWorthMeter extends Component {
             return (
               <path
 								transform={`rotate(${ - angles[idx]},${centerX}, ${centerY})`}
-								key={'stock-' + idx}
+								key={'ticker-' + idx}
                 fill={`#${colors.styleOne[idx]}`}
 								d={`M${centerX},${centerY} l${centerX},0 A${centerX},${centerY} 0 0,0 ${p.x},${p.y} z`}
 							>

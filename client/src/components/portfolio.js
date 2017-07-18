@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 // import classnames from 'classnames';
 import NetWorthMeter from './networth-meter';
-import Stock from './stock';
+import Ticker from './ticker';
 // import Helpers from '../helpers';
 import '../css/portfolio.css';
 
@@ -21,14 +21,14 @@ class EmptyPortfolio extends Component {
   }
 }
 
-// <p> or, add stocks and customize your own portfolio. </p>
-// <button onClick={this.props.onAddStock}> Add stock</button>
+// <p> or, add tickers and customize your own portfolio. </p>
+// <button onClick={this.props.onAddTicker}> Add ticker</button>
 
-class StockPortfolio extends Component {
+class TickerPortfolio extends Component {
 
   render() {
 
-    let netWorth = this.props.stocks.reduce((memo, s) => {
+    let netWorth = this.props.tickers.reduce((memo, s) => {
       console.log('netWorth : ' + s)
       memo.invested += (s.quantity * s.price);
       memo.current += (s.quantity * s.currentPrice);
@@ -37,15 +37,15 @@ class StockPortfolio extends Component {
 
     return (
 
-      <div className="stock-portfolio">
+      <div className="ticker-portfolio">
         <div className="netWorth">
           <NetWorthMeter
             netWorth={netWorth}
-            stocks={this.props.stocks}
+            tickers={this.props.tickers}
           />
         </div>
         {
-          this.props.stocks.map((stock) => <Stock key={stock.id} stock={stock} {...this.props} />)
+          this.props.tickers.map((ticker) => <Ticker key={ticker.id} ticker={ticker} {...this.props} />)
         }
       </div>
     )
@@ -56,8 +56,8 @@ class Portfolio extends Component {
   render() {
 
     let elm = null;
-    if (this.props.stocks.length > 0 ) {
-      elm = <StockPortfolio {...this.props} />
+    if (this.props.tickers.length > 0 ) {
+      elm = <TickerPortfolio {...this.props} />
     } else {
       elm = <EmptyPortfolio {...this.props} />
     }

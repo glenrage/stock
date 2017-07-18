@@ -40,7 +40,7 @@
     border-bottom-style: solid;
 }
 
-.stock-form .cta-buttons {
+.ticker-form .cta-buttons {
     position: relative;
     text-align: right;
     padding: 20px;
@@ -75,7 +75,7 @@
     color: #4d4d4d;
 }
 
-.stock-date .today {
+.ticker-date .today {
     margin: 0 5px 0 -20px;
     font-size: 1.2rem;
 }

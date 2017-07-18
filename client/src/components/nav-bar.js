@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { stock_mode } from './data/constants';
-
+import { ticker_mode } from './data/constants';
 import '../css/nav-bar.css';
 
 class NavBar extends Component {
 	render() {
 		let toggleElm = null;
-		if (this.props.stockMode === stock_mode.detail) {
+		if (this.props.tickerMode === ticker_mode.detail) {
 			toggleElm = (
-				<button onClick={this.props.onToggleStockMode}>
+				<button onClick={this.props.onToggleTickerMode}>
 					<span className="icon-compress" />
 					<i>Minimize</i>
 				</button>
 			);
 		} else {
 			toggleElm = (
-				<button onClick={this.props.onToggleStockMode}>
+				<button onClick={this.props.onToggleTickerMode}>
 					<span className="icon-expand" />
 					<i>Expand</i>
 				</button>
@@ -26,17 +24,12 @@ class NavBar extends Component {
 			<header className="nav-bar">
 				<h1 className="nav-title column" />
 				<ul className="portfolio-actions column">
-					<li>
-						<button onClick={this.props.onReload}>
-							<span className="icon-refresh" />
-							<i>Refresh</i>
-						</button>
-					</li>
+		
 					<li>
 						{toggleElm}
 					</li>
 					<li>
-						<button onClick={this.props.onAddStock}>
+						<button onClick={this.props.onAddTicker}>
 							<span className="icon-plus-circle" />
 							<i>Add</i>
 						</button>
