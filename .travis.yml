@@ -4,5 +4,6 @@ node_js:
 branches:
   only:
   - master
+before_install: cd client
 before_script: yarn
 script: yarn test
