@@ -1,6 +1,13 @@
 
 # Trance Trader
 
+[![Build Status](https://travis-ci.org/glenrage/trance-trader.svg?branch=master)](https://travis-ci.org/glenrage/trance-trader)
+[![Coverage Status](https://coveralls.io/repos/github/glenrage/trance-trader/badge.svg?branch=master)](https://coveralls.io/github/glenrage/trance-trader?branch=master)
+[![dependencies Status](https://david-dm.org/expressjs/express/status.svg)](https://david-dm.org/expressjs/express)
+[![devDependencies Status](https://david-dm.org/expressjs/express/dev-status.svg)](https://david-dm.org/expressjs/express?type=dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 Trance Trader is a stock market portfolio app where users can build a portfolio of their own stocks. They can simulate stock market trades and view their portfolio value.
 
 https://trader-deploy.herokuapp.com/
