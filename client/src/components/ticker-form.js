@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import AutoSuggest from 'react-autosuggest';
 import InlineSelect from './inline-select';
 import {actions, blank_ticker, exchanges} from './data/constants'
 import '../css/ticker-form.css';
